@@ -1,0 +1,50 @@
+server:
+  session-timeout: 1800
+  port: 8080
+  servlet:
+    context-path: /
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/renthouse?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+  redis:
+      host: localhost
+      port: 6379
+      password:
+      # 连接超时时间（毫秒）
+      timeout: 10000
+      jedis:
+        pool:
+          # 连接池中的最大空闲连接
+          max-idle: 8
+          # 连接池中的最小空闲连接
+          min-idle: 10
+          # 连接池最大连接数（使用负值表示没有限制）
+          max-active: 100
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1
+  cache:
+      type: ehcache
+      ehcache:
+        config: classpath:config/ehcache.xml
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  #    打开以下注释 可以打印mybatis的最终sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/**/*Mapper.xml
+  typeAliasesPackage: com.**.domain
+  #分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+  offset-as-page-num: true

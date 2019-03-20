@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.renthouse.rent.order.dao.OrderDao">
+	<select id="listMap" resultType="com.graduation.renthouse.rent.order.domain.Order">
+		select  `id`,`number`,`l.name`,`t.name`,`h.title`,`tenancy_term`,`price`,`status`,`createdate`,`updatedate` from `order` o,house h,tenant t,landlord l where h.id=o.house_id and o.tenant_id=t.id and o.landlord_id=l.id;
+	</select>
+	<select id="get" resultType="com.graduation.renthouse.rent.order.domain.OrderDO">
+		select `id`,`number`,`landlord_id`,`tenant_id`,`house_id`,`tenancy_term`,`price`,`status`,`createdate`,`updatedate` from `order` where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.graduation.renthouse.rent.order.domain.OrderDO">
+		select `id`,`number`,`landlord_id`,`tenant_id`,`house_id`,`tenancy_term`,`price`,`status`,`createdate`,`updatedate` from `order`
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="number != null and number != ''"> and number = #{number} </if>
+		  		  <if test="landlordId != null and landlordId != ''"> and landlord_id = #{landlordId} </if>
+		  		  <if test="tenantId != null and tenantId != ''"> and tenant_id = #{tenantId} </if>
+		  		  <if test="houseId != null and houseId != ''"> and house_id = #{houseId} </if>
+		  		  <if test="tenancyTerm != null and tenancyTerm != ''"> and tenancy_term = #{tenancyTerm} </if>
+		  		  <if test="price != null and price != ''"> and price = #{price} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <!--<if test="createdate != null and createdate != ''"> and createdate = #{createdate} </if>-->
+		  		  <!--<if test="updatedate != null and updatedate != ''"> and updatedate = #{updatedate} </if>-->
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit ${offset}, ${limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from `order`
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="number != null and number != ''"> and number = #{number} </if>
+		  		  <if test="landlordId != null and landlordId != ''"> and landlord_id = #{landlordId} </if>
+		  		  <if test="tenantId != null and tenantId != ''"> and tenant_id = #{tenantId} </if>
+		  		  <if test="houseId != null and houseId != ''"> and house_id = #{houseId} </if>
+		  		  <if test="tenancyTerm != null and tenancyTerm != ''"> and tenancy_term = #{tenancyTerm} </if>
+		  		  <if test="price != null and price != ''"> and price = #{price} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="createdate != null and createdate != ''"> and createdate = #{createdate} </if>
+		  		  <if test="updatedate != null and updatedate != ''"> and updatedate = #{updatedate} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.graduation.renthouse.rent.order.domain.OrderDO" useGeneratedKeys="true" keyProperty="id">
+		insert into `order`
+		(
+			`number`, 
+			`landlord_id`,
+			`tenant_id`, 
+			`house_id`, 
+			`tenancy_term`, 
+			`price`, 
+			`status`, 
+			`createdate`, 
+			`updatedate`
+		)
+		values
+		(
+			#{number}, 
+			#{landlordId}, 
+			#{tenantId}, 
+			#{houseId}, 
+			#{tenancyTerm}, 
+			#{price}, 
+			#{status}, 
+			#{createdate}, 
+			#{updatedate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.graduation.renthouse.rent.order.domain.OrderDO">
+		update `order`
+		<set>
+			<if test="number != null">`number` = #{number}, </if>
+			<if test="landlordId != null">`landlord_id` = #{landlordId}, </if>
+			<if test="tenantId != null">`tenant_id` = #{tenantId}, </if>
+			<if test="houseId != null">`house_id` = #{houseId}, </if>
+			<if test="tenancyTerm != null">`tenancy_term` = #{tenancyTerm}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<!--<if test="updatedate != null and updatedate != ''"> and updatedate = current_timestamp() </if>-->
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from `order` where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from `order` where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

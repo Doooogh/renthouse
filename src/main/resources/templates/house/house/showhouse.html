@@ -1,0 +1,227 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include :: header"></head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Content-language" content="zh-CN">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="applicable-device" content="pc">
+    <!--<script src="/js/jquery.min.js"></script>-->
+    <meta http-equiv="Cache-Control" content="no-transform ">
+    <title>寻家网租房</title>
+
+
+
+    <link rel="stylesheet" href="/css/home/common.css?_v=20190225203200b27">
+    <link rel="stylesheet" href="/css/home/index.css?_v=20190225203200b27">
+    <link href="/css/home/lianjiaim.css?v=15212312340214" property="stylesheet" rel="stylesheet">
+    <script src="//s1.ljcdn.com/matrix_pc/dist/pc/third/dig.js?_v=20190225203200b27"></script><script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="page/list/index" src="https://s1.ljcdn.com/matrix_lianjia_pc/dist/pc/src/page/list/index.js?_v=20190225203200b27"></script></head>
+<link rel="stylesheet" href="/js/appjs/house/layui/css/layui.css"  media="all">
+<link rel="stylesheet" href="/css/home/style.css">
+<style>
+    body{
+        margin-left: 20px;
+    }
+</style>
+<body >
+<div class="wrapper">
+    <div>
+        <div class="search__area">
+            <div class="beike__nav">
+                <a class="beike__nav--logo" href="/#/"><img src="/css/home/img/home-1.png" style="position: relative;top: -13px"><span></span></a>
+            </div>
+            <div class="search w1150" id="search">
+            <div class="search__wrap" style="position: relative;">
+                <input class="search__input fl " id="findByTitle" type="text" data-el="input" placeholder="请输入区域、商圈或小区名开始找房" autocomplete="off" value="" data-value="">
+                <div class="find" id="findByText"style="float: right;width: 40px;height: 40px;padding-top: 10px"> <img class="search__button fl " src="/css/home/img/find.png" style="width: 16px;height: 16px" ></div>
+                <div class="sug-search" style="display: none;"></div></div>
+
+        </div>  </div>
+        <div class="bread__nav w1150" style="margin-bottom: 0px;">
+            <p class="bread__nav__wrapper oneline">
+                <a href="http://bj.lianjia.com/">寻家网北京站</a>&nbsp;&gt;&nbsp;
+            </p><h1>
+            <a href="http://bj.lianjia.com/zufang/">北京租房</a>
+        </h1>
+            <p></p>
+        </div>  <div class="filter">
+        <div class="filter__wrapper w1150" id="filter">
+            <ul class="filter__item--noaside">
+                <li class="filter__item--level1 down strong" data-tab="1" data-el="area" data-antitarget="station"><a href="/zufang/" onclick="return false;">按区域</a></li>
+                <!--<li class="filter__item&#45;&#45;level1 " data-tab="1" data-el="station" data-antitarget="area"><a href="/zufang/" onclick="return false;">按地铁线</a></li>-->
+            </ul>
+
+            <ul data-target="area" class="">
+                <li data-id="0" data-type="district" class="filter__item--level2 filter__item--aside ">
+                    <a href="#"  id="no_astrict" class="large_area clickStyle">不限</a>
+                </li>
+                <li data-id="23008614" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">东城</a>
+                </li>
+                <li data-id="23008626" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">西城</a>
+                </li>
+                <li data-id="23008613" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">朝阳</a>
+                </li>
+                <li data-id="23008618" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">海淀</a>
+                </li>
+                <li data-id="23008617" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">丰台</a>
+                </li>
+                <li data-id="23008623" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">石景山</a>
+                </li>
+                <li data-id="23008625" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">通州</a>
+                </li>
+                <li data-id="23008611" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">昌平</a>
+                </li>
+                <li data-id="23008615" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">大兴</a>
+                </li>
+                <li data-id="23008629" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">亦庄开发区</a>
+                </li>
+                <li data-id="23008624" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">顺义</a>
+                </li>
+                <li data-id="23008616" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">房山</a>
+                </li>
+                <li data-id="23008620" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">门头沟</a>
+                </li>
+                <li data-id="23008622" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">平谷</a>
+                </li>
+                <li data-id="23008619" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">怀柔</a>
+                </li>
+                <li data-id="23008621" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">密云</a>
+                </li>
+                <li data-id="23008628" data-type="district" class="filter__item--level2  ">
+                    <a href="#" class="large_area">延庆</a>
+                </li>
+            </ul>
+
+
+            <ul data-target="station">
+            </ul>
+
+
+            <ul class="filter__ul" data-el="filterPrice">
+                <li class="filter__item--level5 filter__item--aside"><a href="javascript:;">租金</a></li>
+                <li class="filter__item--level5 check ">
+                    <a href="#" class="price_range" price_end="1500" price_start="0">≤1500元</a>
+                </li>
+                <li class="filter__item--level5 check ">
+                    <a href="#" class="price_range" price_start="1500" price_end="2000">1500-2000元</a>
+                </li>
+                <li class="filter__item--level5 check ">
+                    <a href="#" class="price_range" price_start="2000" price_end="3000">2000-3000元</a>
+                </li>
+                <li class="filter__item--level5 check ">
+                    <a href="#" class="price_range" price_start="3000" price_end="5000">3000-5000元</a>
+                </li>
+                <li class="filter__item--level5 check ">
+                    <a href="#" class="price_range" price_start="5000" price_end="8000">5000-8000元</a>
+                </li>
+                <li class="filter__item--level5 check ">
+                    <a href="#" class="price_range" price_start="8000" price_end="10000000000">≥8000元</a>
+                </li>
+                <li class="filter__item--input" data-url="/zufang/brp{min}erp{max}/"><input type="text" id="price_start" value="">-<input id="price_end" type="text" value="">元<span class="filter__button" id="findByPrice" data-el="button"></span></li>
+            </ul>
+
+            <ul class="filter__ul">
+                <li class="filter__item--level5 filter__item--aside"><a href="javascript:;">户型</a></li>
+                <li class="filter__item--level5 check ">
+                    <a class="houseType" href="#" >一居</a>
+                </li>
+                <li class="filter__item--level5 check ">
+                    <a class="houseType" href="#">两居</a>
+                </li>
+                <li class="filter__item--level5 check ">
+                    <a class="houseType" href="#">三居</a>
+                </li>
+                <li class="filter__item--level5 check ">
+                    <a class="houseType" href="#">四居+</a>
+                </li>
+            </ul>
+
+
+            <ul class="filter__ul ">
+                <li class="filter__item--level5 filter__item--aside"><a href="javascript:;">朝向</a></li>
+                <li class="filter__item--level5 check ">
+                    <a class="orientation" href="#">东</a>
+                </li>
+                <li class="filter__item--level5 check ">
+                    <a  class="orientation" href="#">西</a>
+                </li>
+                <li class="filter__item--level5 check ">
+                    <a class="orientation" href="#">南</a>
+                </li>
+                <li class="filter__item--level5 check ">
+                    <a class="orientation" href="#">北</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+        <div class="content w1150" id="content">
+            <div class="content__article">
+                <p class="content__title">
+                    已为您找到 <span class="content__title--hl" id="housesNum"></span> 套 租房
+
+                    <span class="content__title--aside"><a href="#" id="clearUrl">清空条件</a></span>
+                </p>
+
+                <ul class="content__filter" id="contentList">
+                    <li data-event_id="10800" id="synthesize" data-event_action="search_condition=/zufang/" class="content__filter--selected bySelected">
+                        <a href="#" data-event_id="10797" data-event_action="target=综合排序">综合排序</a>
+                    </li>
+                    <li data-event_id="10800" id="newest" data-event_action="search_condition=/zufang/rco11/" class="bySelected">
+                        <a href="#" data-event_id="10797"  data-event_action="target=最新上架">最新上架</a>
+                    </li>
+                    <li data-event_id="10800"  id="byPrice" data-event_action="search_condition=/zufang/rco21/" class="bySelected ">
+
+                        <a href="#" data-event_id="10797"data-event_action="target=价格">价格</a>
+                    </li>
+                    <li data-event_id="10800" id="byArea" data-event_action="search_condition=/zufang/rco31/" class="bySelected ">
+
+                        <a href="#" data-event_id="10797" data-event_action="target=面积">面积</a>
+                    </li>
+                </ul>
+                <div class="test">
+
+                </div>
+                <div class="content__list" id="content__list" style="margin-bottom: 50px" >
+
+
+                 </div>
+                <div id="page" style="float: right"></div>
+                <!--<div class="content__pg" data-el="page_navigation" data-url="/zufang/pg{page}/" data-totalpage="100" data-curpage="1"><a class="hide" href="javascript:;" data-page="0">&lt;</a><a class="cur" href="/zufang/#contentList" data-page="1">1</a><a href="/zufang/pg2/#contentList" data-page="2">2</a><a href="/zufang/pg3/#contentList" data-page="3">3</a><span>...</span><a href="/zufang/pg100/#contentList" data-page="100">100</a><a class="next" href="/zufang/pg2/#contentList" data-page="2">下一页</a></div>-->
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+</div>
+<div th:include="include::footer"></div>
+<script src="/js/appjs/house/layui/layui.all.js"></script>
+<script src="/layui/lay/modules/laypage.js"></script>
+<script src="/layui/layui.js"></script>
+<!--<script type="text/javascript" src="/js/shouhome/common.js?_v=20190225203200b27"></script>-->
+<script src="/js/appjs/house/house/showhome.js?1=7" type="text/javascript"></script>
+<style>.im-housecard img{vertical-align: baseline;}</style>
+<style>.im-housecard img{vertical-align: baseline;}</style>
+</body>
+</html>

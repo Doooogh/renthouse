@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.renthouse.rent.role.dao.RoleDao">
+
+	<select id="get" resultType="com.graduation.renthouse.rent.role.domain.RoleDO">
+		select `role_id`,`name`,`sign`,`createtime`,`updatetime` from role where role_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.graduation.renthouse.rent.role.domain.RoleDO">
+		select `role_id`,`name`,`sign`,`createtime`,`updatetime` from role
+        <where>  
+		  		  <if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="sign != null and sign != ''"> and sign = #{sign} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by role_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from role
+		 <where>  
+		  		  <if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="sign != null and sign != ''"> and sign = #{sign} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.graduation.renthouse.rent.role.domain.RoleDO" useGeneratedKeys="true" keyProperty="roleId">
+		insert into role
+		(
+			`name`, 
+			`sign`, 
+			`createtime`, 
+			`updatetime`
+		)
+		values
+		(
+			#{name}, 
+			#{sign}, 
+			#{createtime}, 
+			#{updatetime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.graduation.renthouse.rent.role.domain.RoleDO">
+		update role 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="sign != null">`sign` = #{sign}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}, </if>
+			<if test="updatetime != null">`updatetime` = #{updatetime}</if>
+		</set>
+		where role_id = #{roleId}
+	</update>
+	
+	<delete id="remove">
+		delete from role where role_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from role where role_id in 
+		<foreach item="roleId" collection="array" open="(" separator="," close=")">
+			#{roleId}
+		</foreach>
+	</delete>
+
+
+
+
+</mapper>

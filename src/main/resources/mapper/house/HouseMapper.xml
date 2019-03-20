@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.renthouse.rent.house.dao.HouseDao">
+
+	<select id="get" resultType="com.graduation.renthouse.rent.house.domain.HouseDO">
+		select `id`,`title`,`large_areas`,`small_areas`,`square_meter`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house where id = #{id}
+	</select>
+
+	<select id="list" resultType="com.graduation.renthouse.rent.house.domain.HouseDO">
+		select `id`,`title`,`large_areas`,`small_areas`,`square_meter`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="title != null and title != ''"> and title =#{title} </if>
+		  		  <if test="largeAreas != null and largeAreas != ''"> and large_areas = #{largeAreas} </if>
+		  		  <if test="smallAreas != null and smallAreas != ''"> and small_areas = #{smallAreas} </if>
+		  		  <if test="squareMeter != null and squareMeter != ''"> and square_meter = #{squareMeter} </if>
+		  		  <if test="orientation != null and orientation != ''"> and orientation = #{orientation} </if>
+		  		  <if test="houseType != null and houseType != ''"> and house_type = #{houseType} </if>
+		  		  <if test="pubdate != null and pubdate != ''"> and pubdate = #{pubdate} </if>
+		  		  <if test="price != null and price != ''"> and price = #{price} </if>
+		  		  <if test="description != null and description != ''"> and description = #{description} </if>
+		  		  <if test="address != null and address != ''"> and address = #{address} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		  <if test="landlordId != null and landlordId != ''"> and landlord_id = #{landlordId} </if>
+		  		  <if test="tenantId != null and tenantId != ''"> and tenant_id = #{tenantId} </if>
+		  		  <if test="elevator != null and elevator != ''"> and elevator = #{elevator} </if>
+		  		  <if test="tv != null and tv != ''"> and tv = #{tv} </if>
+		  		  <if test="fridge != null and fridge != ''"> and fridge = #{fridge} </if>
+		  		  <if test="airConditioner != null and airConditioner != ''"> and air_conditioner = #{airConditioner} </if>
+		  		  <if test="broadBand != null and broadBand != ''"> and broad_band = #{broadBand} </if>
+		  		  <if test="wardrobe != null and wardrobe != ''"> and wardrobe = #{wardrobe} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${asc}
+            </when>
+			<otherwise>
+                order by id asc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit ${offset}, ${limit}
+		</if>
+	</select>
+    <select id="findByMore" resultType="com.graduation.renthouse.rent.house.domain.HouseDO">
+      	select `id`,`title`,`large_areas`,`small_areas`,`square_meter`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house
+        <where>
+            <if test="largeAreas != null and largeAreas != ''"> and large_areas=#{largeAreas} </if>
+            <if test="orientation != null and orientation != ''"> and orientation=#{orientation} </if>
+            <if test="houseType != null and houseType != ''"> and house_type like '${houseType}室%'  </if>
+            <if test="priceStart != null and priceStart != '' and priceEnd != null and priceEnd != ''"> and price between #{priceStart} and #{priceEnd} </if>
+        </where>
+    </select>
+	<select id="countByMore" resultType="int">
+		select count(*) from house
+		<where>
+			<if test="largeAreas != null and largeAreas != ''"> and large_areas=#{largeAreas} </if>
+			<if test="orientation != null and orientation != ''"> and orientation=#{orientation} </if>
+			<if test="houseType != null and houseType != ''"> and house_type like '${houseType}室%'  </if>
+			<if test="priceStart != null and priceStart != '' and priceEnd != null and priceEnd != ''"> and price between #{priceStart} and #{priceEnd} </if>
+
+		</where>
+	</select>
+
+    <select id="findByTitle" resultType="com.graduation.renthouse.rent.house.domain.HouseDO">
+        select `id`,`title`,`large_areas`,`small_areas`,`square_meter`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house
+        <where>
+            <if test="title != null and title != ''"> or title like '%${title}%' </if>
+            <if test="largeAreas != null and largeAreas != ''"> or large_areas like '%${largeAreas}%' </if>
+       </where>
+
+    </select>
+	<select id="countByTitle" resultType="int">
+		select count(*) from house
+		<where>
+			<if test="title != null and title != ''"> or title like '%${title}%'</if>
+			<if test="largeAreas != null and largeAreas != ''"> or large_areas like '%${largeAreas}%'  </if>
+		</where>
+
+	</select>
+ 	<select id="count" resultType="int">
+		select count(*) from house
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="largeAreas != null and largeAreas != ''"> and large_areas = #{largeAreas} </if>
+		  		  <if test="smallAreas != null and smallAreas != ''"> and small_areas = #{smallAreas} </if>
+		  		  <if test="squareMeter != null and squareMeter != ''"> and square_meter = #{squareMeter} </if>
+		  		  <if test="orientation != null and orientation != ''"> and orientation = #{orientation} </if>
+		  		  <if test="houseType != null and houseType != ''"> and house_type = #{houseType} </if>
+		  		  <if test="pubdate != null and pubdate != ''"> and pubdate = #{pubdate} </if>
+		  		  <if test="price != null and price != ''"> and price = #{price} </if>
+		  		  <if test="description != null and description != ''"> and description = #{description} </if>
+		  		  <if test="address != null and address != ''"> and address = #{address} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		  <if test="landlordId != null and landlordId != ''"> and landlord_id = #{landlordId} </if>
+			      <if test="tenantId != null and tenantId != ''"> and tenant_id = #{tenantId} </if>
+			      <if test="elevator != null and elevator != ''"> and elevator = #{elevator} </if>
+		  		  <if test="tv != null and tv != ''"> and tv = #{tv} </if>
+		  		  <if test="fridge != null and fridge != ''"> and fridge = #{fridge} </if>
+		  		  <if test="airConditioner != null and airConditioner != ''"> and air_conditioner = #{airConditioner} </if>
+		  		  <if test="broadBand != null and broadBand != ''"> and broad_band = #{broadBand} </if>
+		  		  <if test="wardrobe != null and wardrobe != ''"> and wardrobe = #{wardrobe} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.graduation.renthouse.rent.house.domain.HouseDO" useGeneratedKeys="true" keyProperty="id">
+		insert into house
+		(
+			`title`, 
+			`large_areas`, 
+			`small_areas`, 
+			`square_meter`, 
+			`orientation`, 
+			`house_type`, 
+			`pubdate`, 
+			`price`, 
+			`description`, 
+			`address`, 
+			`add_time`, 
+			`landlord_id`,
+			`tenant_id`,
+			`elevator`, 
+			`tv`, 
+			`fridge`, 
+			`air_conditioner`, 
+			`broad_band`, 
+			`wardrobe`, 
+			`createtime`, 
+			`updatetime`, 
+			`status`
+		)
+		values
+		(
+			#{title}, 
+			#{largeAreas}, 
+			#{smallAreas}, 
+			#{squareMeter}, 
+			#{orientation}, 
+			#{houseType}, 
+			#{pubdate}, 
+			#{price}, 
+			#{description}, 
+			#{address}, 
+			#{addTime}, 
+			#{landlordId},
+			#{tenantId},
+			#{elevator}, 
+			#{tv}, 
+			#{fridge}, 
+			#{airConditioner}, 
+			#{broadBand}, 
+			#{wardrobe}, 
+			#{createtime}, 
+			#{updatetime}, 
+			#{status}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.graduation.renthouse.rent.house.domain.HouseDO">
+		update house 
+		<set>
+			<if test="title != null">`title` = #{title}, </if>
+			<if test="largeAreas != null">`large_areas` = #{largeAreas}, </if>
+			<if test="smallAreas != null">`small_areas` = #{smallAreas}, </if>
+			<if test="squareMeter != null">`square_meter` = #{squareMeter}, </if>
+			<if test="orientation != null">`orientation` = #{orientation}, </if>
+			<if test="houseType != null">`house_type` = #{houseType}, </if>
+			<if test="pubdate != null">`pubdate` = #{pubdate}, </if>
+			<if test="price != null">`price` = #{price}, </if>
+			<if test="description != null">`description` = #{description}, </if>
+			<if test="address != null">`address` = #{address}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="landlordId != null">`landlord_id` = #{landlordId}, </if>
+			<if test="tenantId != null ">`tenant_id` = #{tenantId}, </if>
+
+			<if test="elevator != null">`elevator` = #{elevator}, </if>
+			<if test="tv != null">`tv` = #{tv}, </if>
+			<if test="fridge != null">`fridge` = #{fridge}, </if>
+			<if test="airConditioner != null">`air_conditioner` = #{airConditioner}, </if>
+			<if test="broadBand != null">`broad_band` = #{broadBand}, </if>
+			<if test="wardrobe != null">`wardrobe` = #{wardrobe}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}, </if>
+			<if test="updatetime != null">`updatetime` = #{updatetime}, </if>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from house where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from house where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

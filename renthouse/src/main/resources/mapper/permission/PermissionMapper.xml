@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.renthouse.rent.permission.dao.PermissionDao">
+
+	<select id="get" resultType="com.graduation.renthouse.rent.permission.domain.PermissionDO">
+		select `id`,`parent_id`,`name`,`url`,`permission`,`type`,`img`,`createtime`,`updatetime` from permission where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.graduation.renthouse.rent.permission.domain.PermissionDO">
+		select `id`,`parent_id`,`name`,`url`,`permission`,`type`,`img`,`createtime`,`updatetime` from permission
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="permission != null and permission != ''"> and permission = #{permission} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="img != null and img != ''"> and img = #{img} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from permission
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+			      <if test="url != null and url != ''"> and url = #{url} </if>
+			      <if test="permission != null and permission != ''"> and permission = #{permission} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="img != null and img != ''"> and img = #{img} </if>
+		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.graduation.renthouse.rent.permission.domain.PermissionDO" useGeneratedKeys="true" keyProperty="id">
+		insert into permission
+		(
+			`parent_id`, 
+			`name`,
+			`url`,
+			`permission`, 
+			`type`, 
+			`img`,
+			`createtime`, 
+			`updatetime`
+		)
+		values
+		(
+			#{parentId}, 
+			#{name}, 
+			#{url},
+			#{permission},
+			#{type}, 
+			#{img},
+			#{createtime}, 
+			#{updatetime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.graduation.renthouse.rent.permission.domain.PermissionDO">
+		update permission 
+		<set>
+			<if test="parentId != null">`parent_id` = #{parentId}, </if>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="url != null and url != ''"> and url = #{url} </if>
+
+			<if test="permission != null">`permission` = #{permission}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="img != null">`img` = #{img}, </if>
+			<if test="createtime != null">`createtime` = #{createtime}, </if>
+			<if test="updatetime != null">`updatetime` = #{updatetime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from permission where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from permission where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="selectByRoles" resultType="com.graduation.renthouse.rent.permission.domain.PermissionDO">
+		select `id`,`parent_id`,`name`,`url`,`permission`,`type`,`img`,`createtime`,`updatetime` from permission where `id` in
+		select per_id from role_per where role_id in
+		<foreach item="item" index="index" collection="list"
+				 separator=",">
+			item
+		</foreach>
+	</select>
+
+</mapper>

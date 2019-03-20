@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include :: header"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>生成订单</title>
+    <link rel="stylesheet" href="/css/home/form.css?1=5">
+    <link rel="stylesheet" href="/js/appjs/house/layui/css/modules/laydate/default/laydate.css">
+    <link rel="stylesheet" href="/js/appjs/house/layui/css/layui.css"  media="all">
+</head>
+<style>
+    .col-sm-3{
+        padding-right: 5px;
+    }
+</style>
+<body >
+    <div class="content">
+        <div class="all">
+            <form class="form-horizontal" id="signupForm" >
+                <div class="top">
+                    <div class="left">
+                        <input type="hidden" id="houseId" th:value="*{houseId != null}? *{houseId} : null">
+                        <input type="hidden" id="landlordId">
+                        <div class="form-group">
+                            <label for="title" class="col-sm-3 control-label">房子标题:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="title" id="title" placeholder="房子标题">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="landlordName" class="col-sm-3 control-label">房东姓名</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="landlordName" id="landlordName" placeholder="房东姓名">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenancy" class="col-sm-3 control-label">租期:</label>
+                            <div class="layui-inline col-sm-8">
+                                <div class="layui-input-inline" >
+                                    <input type="text" autocomplete="off" class="layui-input" style="width: 202px;height: 34px;border-radius: 5px" name="tenancy" id="tenancy" placeholder="租期">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="price" class="col-sm-3 control-label">价钱:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="price" id="price" placeholder="价钱" >
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="right">
+                        <div class="form-group">
+                            <label for="tenantName" class="col-sm-3 control-label">租客姓名:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control"  name="tenantName" id="tenantName" placeholder="租客姓名">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="landlordName" class="col-sm-3 control-label">性别:</label>
+                            <div class="radio col-sm-3">
+                                <label>
+                                    <input type="radio" class="sex" name="sex" value="男" checked>
+                                   男
+                                </label>
+                            </div>
+                            <div class="radio col-sm-3">
+                                <label>
+                                    <input type="radio" class="sex" name="sex" value="女" >
+                                    女
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="col-sm-3 control-label">手机号:</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="phone" id="phone" placeholder="手机号">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="bottom">
+                    <div class="bottom_left">
+                        <p>
+                            <span class="money" th:text="合计金额+':'"></span>
+                            <span class="allmoney">0元</span>
+                        </p>
+                    </div>
+                    <div class="bottom_right">
+                        <button class="btn_left bt btn btn-default" onclick="to_order()" id="ordered"type="button">预约</button>
+                        <button class="btn_right bt btn btn-primary" onclick="to_submit()" id="submit" type="button">提交</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/jquery/jquery-2.2.4.js"></script>
+    <div th:include="include::footerjslow3"></div>
+    <script src="/js/layui.js"></script>
+    <script src="/js/appjs/house/house/newOrder.js?1=8"></script>
+</body>
+</html>
