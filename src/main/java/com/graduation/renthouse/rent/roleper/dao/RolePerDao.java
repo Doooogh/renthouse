@@ -33,8 +33,6 @@ public interface RolePerDao {
 
 	List<Integer> listPerIdByRoleId(Integer roleId);
 
-
-
 	int deletePerByRoleId(Integer roleId);
 
 	int batchSave(List<RolePerDO> rolePers);

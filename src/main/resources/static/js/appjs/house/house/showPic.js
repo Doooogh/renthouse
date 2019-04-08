@@ -18,7 +18,7 @@ function fileLoad() {
                 acceptMime: 'image/jpg, image/png,image/jpeg',
                 auto: false,  //auto 参数必须设置为false
                 bindAction: 'imgLoad',
-                size: "2048",
+                size: "1024",
                 exts: 'jpg|png|jpeg'
                 ,choose: function(obj){  //上传前选择回调方法
                     var flag = true;

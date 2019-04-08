@@ -1,5 +1,6 @@
 package com.graduation.renthouse.system.utils;
 
+import com.graduation.renthouse.rent.user.domain.UserDO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -17,11 +18,11 @@ public class ShiroUtils {
     public static Subject getSubjct() {
         return SecurityUtils.getSubject();
     }
-/*    public static UserDO getUser() {
+   /* public static UserDO getUser() {
         Object object = getSubjct().getPrincipal();
         return (UserDO)object;
     }
-    public static Long getUserId() {
+    public static Integer getUserId() {
         return getUser().getUserId();
     }*/
     public static void logout() {

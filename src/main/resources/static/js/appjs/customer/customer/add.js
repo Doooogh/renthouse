@@ -7,6 +7,7 @@ $.validator.setDefaults({
 		save();
 	}
 });
+
 function save() {
 	$.ajax({
 		cache : true,
