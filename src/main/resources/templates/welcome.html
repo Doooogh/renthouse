@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+<head th:include="include :: header"></head>
     <head>
         <meta charset="UTF-8">
         <title>欢迎页面-X-admin2.1</title>
@@ -9,10 +10,11 @@
         <link rel="stylesheet" href="./css/font.css">
         <link rel="stylesheet" href="./css/xadmin.css">
     </head>
+    <script src="/js/chart/echarts.min.js"></script>
     <body>
     <div class="x-body">
         <blockquote class="layui-elem-quote"  >欢迎管理员：
-            <span class="x-red" th:text="${username}">test</span>！当前时间:<span th:text="${currentTime}"></span>
+            <span class="x-red" th:text="${username}">test</span>！当前时间:<span id="time"></span>
         </blockquote>
         <fieldset class="layui-elem-field">
             <legend>数据统计</legend>
@@ -36,6 +38,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="layui-col-md12">
+                    <div class="layui-inline" id="tool" style="margin: 10px 20px;float: right;z-index: 1">
+                        <label class="layui-form-label">时间范围</label>
+                        <div class="layui-input-inline">
+                            <input type="text"  id="date" lay-verify="date" placeholder="yyyy-MM-dd - yyyy-MM-dd" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div id="main" style="width: 100%;height:300px;"></div>
+                </div>
             </div>
         </fieldset>
         <fieldset class="layui-elem-field">
@@ -58,7 +69,8 @@
             </div>
         </fieldset>
     </div>
-        <script>
+    <div th:include="include :: footer"></div>
+    <script>
         var _hmt = _hmt || [];
         (function() {
           var hm = document.createElement("script");
@@ -66,6 +78,115 @@
           var s = document.getElementsByTagName("script")[0]; 
           s.parentNode.insertBefore(hm, s);
         })();
+
         </script>
+    <script>
+        function getDate() {
+            var today = new Date();
+            var date = today.getFullYear() + "-" + twoDigits(today.getMonth() + 1) + "-" + twoDigits(today.getDate()) + " ";
+            var week = " 星期" + "日一二三四五六 ".charAt(today.getDay());
+            var time = twoDigits(today.getHours()) + ": " + twoDigits(today.getMinutes()) + ": " + twoDigits(today.getSeconds());
+            $("#time").html(date +" "+time);
+        }
+        function twoDigits(val) {
+            if (val < 10) return "0" + val; return val;
+        }
+        $(function () {
+            setInterval(getDate, 1000);
+        });
+    </script>
+    <script>
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            //日期范围
+            laydate.render({
+                elem: '#date'
+                , range: true
+            });
+        });
+    </script>
+    <script>
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        option = {
+            title: {
+                text: '实时报表'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data:['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataView: { //数据视图
+                        show: true
+                    },
+                    restore: { //重置
+                        show: true
+                    },
+                    dataZoom: { //数据缩放视图
+                        show: true
+                    },
+                    saveAsImage: {//保存图片
+                        show: true
+                    },
+                    magicType: {//动态类型切换
+                        type: ['bar', 'line']
+                    }
+                }
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['周一','周二','周三','周四','周五','周六','周日']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [
+                {
+                    name:'邮件营销',
+                    type:'line',
+                    stack: '总量',
+                    data:[120, 132, 101, 134, 90, 230, 210]
+                },
+                {
+                    name:'联盟广告',
+                    type:'line',
+                    stack: '总量',
+                    data:[220, 182, 191, 234, 290, 330, 310]
+                },
+                {
+                    name:'视频广告',
+                    type:'line',
+                    stack: '总量',
+                    data:[150, 232, 201, 154, 190, 330, 410]
+                },
+                {
+                    name:'直接访问',
+                    type:'line',
+                    stack: '总量',
+                    data:[320, 332, 301, 334, 390, 330, 320]
+                },
+                {
+                    name:'搜索引擎',
+                    type:'line',
+                    stack: '总量',
+                    data:[820, 932, 901, 934, 1290, 1330, 1320]
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    </script>
     </body>
 </html>

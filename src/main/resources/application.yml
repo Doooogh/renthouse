@@ -34,7 +34,7 @@ spring:
       ehcache:
         config: classpath:config/ehcache.xml
 logging:
-  logpath: F:/file
+  logpath: F:/file/logs
   filename: renthouse
 
 mybatis:
