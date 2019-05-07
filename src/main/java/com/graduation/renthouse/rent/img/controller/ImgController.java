@@ -3,7 +3,7 @@ package com.graduation.renthouse.rent.img.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.graduation.renthouse.system.comment.Constant;
+import com.graduation.renthouse.system.common.Constant;
 import com.graduation.renthouse.system.utils.FileUtil;
 import com.graduation.renthouse.system.utils.PageUtils;
 import com.graduation.renthouse.system.utils.Query;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;

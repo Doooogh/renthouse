@@ -231,7 +231,7 @@
             }
 
             if (input_char === "'" || input_char === '"') {
-              if (!content[1] || content[1] !== '!') { //if we're in a comment strings don't get treated specially
+              if (!content[1] || content[1] !== '!') { //if we're in a common strings don't get treated specially
                 input_char += this.get_unformatted(input_char);
                 space = true;
               }
@@ -299,8 +299,8 @@
             }
             this.tag_type = 'SINGLE';
           }
-          else if (tag_check.charAt(0) === '!') { //peek for <!-- comment
-            if (tag_check.indexOf('[if') !== -1) { //peek for <!--[if conditional comment
+          else if (tag_check.charAt(0) === '!') { //peek for <!-- common
+            if (tag_check.indexOf('[if') !== -1) { //peek for <!--[if conditional common
               if (tag_complete.indexOf('!IE') !== -1) { //this type needs a closing --> so...
                 comment = this.get_unformatted('-->', tag_complete); //...delegate to get_unformatted
                 content.push(comment);
@@ -309,11 +309,11 @@
                 this.tag_type = 'START';
               }
             }
-            else if (tag_check.indexOf('[endif') !== -1) {//peek for <!--[endif end conditional comment
+            else if (tag_check.indexOf('[endif') !== -1) {//peek for <!--[endif end conditional common
               this.tag_type = 'END';
               this.unindent();
             }
-            else if (tag_check.indexOf('[cdata[') !== -1) { //if it's a <[cdata[ comment...
+            else if (tag_check.indexOf('[cdata[') !== -1) { //if it's a <[cdata[ common...
               comment = this.get_unformatted(']]>', tag_complete); //...delegate to get_unformatted function
               content.push(comment);
               if ( ! peek) {

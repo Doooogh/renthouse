@@ -1,4 +1,4 @@
-package com.graduation.renthouse.system.comment;
+package com.graduation.renthouse.system.common;
 
 public class Constant {
     public static String OFFSET = "offset";

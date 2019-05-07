@@ -1263,7 +1263,7 @@
                         hotkey: 'Ctrl+Q',
                         title: 'Quote',
                         icon: {
-                            glyph: 'glyphicon glyphicon-comment',
+                            glyph: 'glyphicon glyphicon-common',
                             fa: 'fa fa-quote-left',
                             'fa-3': 'icon-quote-left'
                         },

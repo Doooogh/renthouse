@@ -5,7 +5,7 @@ import com.graduation.renthouse.rent.common.redis.shiro.RedisCacheManager;
 import com.graduation.renthouse.rent.common.redis.shiro.RedisManager;
 import com.graduation.renthouse.rent.common.redis.shiro.RedisSessionDAO;
 import com.graduation.renthouse.rent.realm.UserRealm;
-import com.graduation.renthouse.system.comment.Constant;
+import com.graduation.renthouse.system.common.Constant;
 import net.sf.ehcache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.SecurityManager;

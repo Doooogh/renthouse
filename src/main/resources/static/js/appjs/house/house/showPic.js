@@ -41,7 +41,7 @@ function fileLoad() {
                                 layer.msg("轮播图最大数量为6!");
                                 return false;
                             }
-                        }
+                        };
                         return flag;
                     });
                 },

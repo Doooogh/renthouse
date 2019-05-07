@@ -34,7 +34,7 @@ var $sanitizeMinErr = angular.$$minErr('$sanitize');
  *     start: function(tag, attrs, unary) {},
  *     end: function(tag) {},
  *     chars: function(text) {},
- *     comment: function(text) {}
+ *     common: function(text) {}
  * });
  *
  */
@@ -229,7 +229,7 @@ function makeMap(str) {
  *     start: function(tag, attrs, unary) {},
  *     end: function(tag) {},
  *     chars: function(text) {},
- *     comment: function(text) {}
+ *     common: function(text) {}
  * });
  *
  * @param {string} html string
@@ -247,7 +247,7 @@ function htmlParser( html, handler ) {
 
       // Comment
       if ( html.indexOf("<!--") === 0 ) {
-        // comments containing -- are not allowed unless they terminate the comment
+        // comments containing -- are not allowed unless they terminate the common
         index = html.indexOf("--", 4);
 
         if ( index >= 0 && html.lastIndexOf("-->", index) === index) {
@@ -419,7 +419,7 @@ function encodeEntities(value) {
  *     start: function(tag, attrs, unary) {},
  *     end: function(tag) {},
  *     chars: function(text) {},
- *     comment: function(text) {}
+ *     common: function(text) {}
  * }
  */
 function htmlSanitizeWriter(buf, uriValidator){

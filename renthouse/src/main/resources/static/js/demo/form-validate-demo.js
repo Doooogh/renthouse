@@ -22,7 +22,7 @@
 
         //以下为官方示例
       /*  $().ready(function () {
-            // validate the comment form when it is submitted
+            // validate the common form when it is submitted
             $("#commentForm").validate();
 
             // validate signup form on keyup and submit

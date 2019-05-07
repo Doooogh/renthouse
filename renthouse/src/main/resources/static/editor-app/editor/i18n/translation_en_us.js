@@ -263,11 +263,11 @@ ORYX.I18N.PropertyWindow.title = "Properties";
 if(!ORYX.I18N.ShapeRepository) ORYX.I18N.ShapeRepository = {};
 ORYX.I18N.ShapeRepository.title = "Shape Repository";
 
-ORYX.I18N.Save.dialogDesciption = "Please enter a name, a description and a comment.";
+ORYX.I18N.Save.dialogDesciption = "Please enter a name, a description and a common.";
 ORYX.I18N.Save.dialogLabelTitle = "Title";
 ORYX.I18N.Save.dialogLabelDesc = "Description";
 ORYX.I18N.Save.dialogLabelType = "Type";
-ORYX.I18N.Save.dialogLabelComment = "Revision comment";
+ORYX.I18N.Save.dialogLabelComment = "Revision common";
 
 if(!ORYX.I18N.Perspective) ORYX.I18N.Perspective = {};
 ORYX.I18N.Perspective.no = "No Perspective"

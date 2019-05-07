@@ -3,7 +3,7 @@ package com.graduation.renthouse.rent.img.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.graduation.renthouse.system.comment.Constant;
+import com.graduation.renthouse.system.common.Constant;
 import com.graduation.renthouse.system.utils.FileUtil;
 import com.graduation.renthouse.system.utils.PageUtils;
 import com.graduation.renthouse.system.utils.Query;

@@ -18,13 +18,13 @@ public class ShiroUtils {
     public static Subject getSubjct() {
         return SecurityUtils.getSubject();
     }
-   /* public static UserDO getUser() {
+    public static UserDO getUser() {
         Object object = getSubjct().getPrincipal();
         return (UserDO)object;
     }
     public static Integer getUserId() {
         return getUser().getUserId();
-    }*/
+    }
     public static void logout() {
         getSubjct().logout();
     }

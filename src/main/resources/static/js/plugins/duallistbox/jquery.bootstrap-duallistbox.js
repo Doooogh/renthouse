@@ -9,7 +9,7 @@
       moveAllLabel: '移动全部',
       removeSelectedLabel: '移除选择',
       removeAllLabel: '移除全部',
-      moveOnSelect: true,                                                                 // true/false (forced true on androids, see the comment later)
+      moveOnSelect: true,                                                                 // true/false (forced true on androids, see the common later)
       preserveSelectionOnMove: false,                                                     // 'all' / 'moved' / false
       selectedListLabel: false,                                                           // 'string', false
       nonSelectedListLabel: false,                                                        // 'string', false

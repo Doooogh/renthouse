@@ -6,7 +6,7 @@ import com.google.common.base.CaseFormat;
 import com.graduation.renthouse.rent.house.dao.HouseDao;
 import com.graduation.renthouse.rent.house.domain.HouseDO;
 import com.graduation.renthouse.rent.landlord.domain.LandlordVO;
-import com.graduation.renthouse.system.comment.Constant;
+import com.graduation.renthouse.system.common.Constant;
 import com.graduation.renthouse.system.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
