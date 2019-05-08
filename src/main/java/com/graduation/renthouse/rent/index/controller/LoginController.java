@@ -2,6 +2,7 @@ package com.graduation.renthouse.rent.index.controller;
 
 import com.graduation.renthouse.rent.user.domain.UserDO;
 import com.graduation.renthouse.rent.user.service.UserService;
+import com.graduation.renthouse.system.annotation.Log;
 import com.graduation.renthouse.system.utils.R;
 import com.graduation.renthouse.system.utils.ShiroUtils;
 import org.apache.shiro.SecurityUtils;
@@ -41,6 +42,7 @@ public class LoginController {
 
     //用户登录
     @PostMapping("/login")
+    @Log("用户登录")
     @ResponseBody
     public R login(String username,String password) {
         UserDO user=userService.getByUsername(username);
@@ -98,6 +100,7 @@ public class LoginController {
         return "forward:/login.jsp";*/
     }
 
+    @Log("用户登出")
     @GetMapping("/logout")
     String logout() {
         ShiroUtils.logout();

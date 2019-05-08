@@ -6,6 +6,7 @@ import com.graduation.renthouse.system.job.service.JobService;
 import com.graduation.renthouse.system.utils.PageUtils;
 import com.graduation.renthouse.system.utils.Query;
 import com.graduation.renthouse.system.utils.R;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ public class JobController extends BaseController{
 	private JobService taskScheduleJobService;
 
 	@GetMapping()
+	@RequiresPermissions("common:job")
 	String taskScheduleJob() {
 		return "common/job/job";
 	}

@@ -1,6 +1,7 @@
 package com.graduation.renthouse.system.aspect;
 
 
+import com.graduation.renthouse.rent.user.dao.UserDao;
 import com.graduation.renthouse.rent.user.domain.UserDO;
 import com.graduation.renthouse.system.annotation.Log;
 import com.graduation.renthouse.system.log.domain.LogDO;
@@ -30,6 +31,9 @@ public class LogAspect {
 
     @Autowired
     LogService logService;
+
+    @Autowired
+    UserDao userDao;
 
 
     @Pointcut("@annotation(com.graduation.renthouse.system.annotation.Log)")
@@ -74,7 +78,8 @@ public class LogAspect {
         // 设置IP地址
         sysLog.setIp(IPUtils.getIpAddr(request));
         // 用户名
-        UserDO currUser = ShiroUtils.getUser();
+        Object object=ShiroUtils.getSubjct().getPrincipal();
+        UserDO currUser=userDao.getByUsername((String) object);
         if (null == currUser) {
             if (null != sysLog.getParams()) {
                 sysLog.setUserId(-1L);
@@ -84,8 +89,8 @@ public class LogAspect {
                 sysLog.setUsername("获取用户信息为空");
             }
         } else {
-            sysLog.setUserId((long)ShiroUtils.getUserId());
-            sysLog.setUsername(ShiroUtils.getUser().getUsername());
+            sysLog.setUserId((long)currUser.getUserId());
+            sysLog.setUsername(currUser.getUsername());
         }
         sysLog.setTime((int) time);
         // 系统当前时间

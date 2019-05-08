@@ -3,6 +3,7 @@ package com.graduation.renthouse.rent.role.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.graduation.renthouse.system.annotation.Log;
 import com.graduation.renthouse.system.utils.PageUtils;
 import com.graduation.renthouse.system.utils.Query;
 import com.graduation.renthouse.system.utils.R;
@@ -81,17 +82,11 @@ public class RoleController {
 	/**
 	 * 修改
 	 */
+	@Log("修改角色权限")
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("role:role:edit")
 	public R update( RoleDO role){
-		System.out.println(role.getName());
-		System.out.println(role.getSign());
-		System.out.println(role.getRoleId());
-		System.out.println("--------------");
-		for (Integer integer : role.getPerIds()) {
-			System.out.println(integer);
-		}
 		int a=roleService.update(role);
 
 		return R.ok();
@@ -100,6 +95,7 @@ public class RoleController {
 	/**
 	 * 删除
 	 */
+	@Log("删除角色")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("role:role:remove")
@@ -113,6 +109,7 @@ public class RoleController {
 	/**
 	 * 删除
 	 */
+	@Log("批量删除角色")
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("role:role:batchRemove")

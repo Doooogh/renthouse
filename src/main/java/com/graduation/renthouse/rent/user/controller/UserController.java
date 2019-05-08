@@ -6,6 +6,7 @@ import com.graduation.renthouse.rent.role.domain.RoleDO;
 import com.graduation.renthouse.rent.role.service.RoleService;
 import com.graduation.renthouse.rent.userrole.domain.UserRoleDO;
 import com.graduation.renthouse.rent.userrole.service.UserRoleService;
+import com.graduation.renthouse.system.annotation.Log;
 import com.graduation.renthouse.system.utils.PageUtils;
 import com.graduation.renthouse.system.utils.Query;
 import com.graduation.renthouse.system.utils.R;
@@ -62,7 +63,8 @@ public class UserController {
 		PageUtils pageUtils = new PageUtils(userList, total);
 		return pageUtils;
 	}
-	
+
+
 	@GetMapping("/add")
 	@RequiresPermissions("user:user:add")
 	String add(Model model){
@@ -90,6 +92,7 @@ public class UserController {
 	/**
 	 * 保存
 	 */
+	@Log("用户添加")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("user:user:add")
@@ -107,6 +110,7 @@ public class UserController {
 	/**
 	 * 修改
 	 */
+	@Log("编辑用户")
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("user:user:edit")
@@ -118,6 +122,7 @@ public class UserController {
 	/**
 	 * 删除
 	 */
+	@Log("删除用户")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("user:user:remove")
@@ -131,6 +136,7 @@ public class UserController {
 	/**
 	 * 删除
 	 */
+	@Log("批量删除用户")
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("user:user:batchRemove")

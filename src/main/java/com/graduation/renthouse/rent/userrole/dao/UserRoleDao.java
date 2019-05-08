@@ -6,6 +6,7 @@ import com.graduation.renthouse.rent.userrole.domain.UserRoleDO;
 import java.util.List;
 import java.util.Map;
 
+import com.graduation.renthouse.system.annotation.Log;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -31,8 +32,10 @@ public interface UserRoleDao {
 	
 	int batchRemove(Integer[] ids);
 
+	@Log("批量添加用户角色")
 	int batchSave(List<UserRoleDO> userRoles);
 
+	@Log("批量删除用户角色")
 	int deleteByUserId(Integer userId);
 
 	List<Integer> selectRoleIdByUserId(Integer userId);

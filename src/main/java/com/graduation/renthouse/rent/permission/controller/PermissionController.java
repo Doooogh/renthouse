@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.graduation.renthouse.rent.common.entity.Tree;
+import com.graduation.renthouse.system.annotation.Log;
 import com.graduation.renthouse.system.utils.PageUtils;
 import com.graduation.renthouse.system.utils.Query;
 import com.graduation.renthouse.system.utils.R;
@@ -94,6 +95,7 @@ public class PermissionController {
 	/**
 	 * 保存
 	 */
+	@Log("添加权限菜单")
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("permission:permission:add")
@@ -106,6 +108,7 @@ public class PermissionController {
 	/**
 	 * 修改
 	 */
+	@Log("修改权限菜单")
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("permission:permission:edit")
@@ -117,6 +120,7 @@ public class PermissionController {
 	/**
 	 * 删除
 	 */
+	@Log("删除权限菜单")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("permission:permission:remove")
@@ -151,6 +155,7 @@ public class PermissionController {
 	/**
 	 * 删除
 	 */
+	@Log("批量删除权限菜单")
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("permission:permission:batchRemove")
