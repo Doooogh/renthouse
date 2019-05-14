@@ -13,6 +13,7 @@
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="title != null and title != ''"> and title =#{title} </if>
 		  		  <if test="largeAreas != null and largeAreas != ''"> and large_areas = #{largeAreas} </if>
+			      <if test="status != null and status != ''"> and `status` = #{status} </if>
 		  		  <if test="smallAreas != null and smallAreas != ''"> and small_areas = #{smallAreas} </if>
 		  		  <if test="squareMeter != null and squareMeter != ''"> and square_meter = #{squareMeter} </if>
 		  		  <if test="orientation != null and orientation != ''"> and orientation = #{orientation} </if>
@@ -32,7 +33,7 @@
 		  		  <if test="wardrobe != null and wardrobe != ''"> and wardrobe = #{wardrobe} </if>
 		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
 		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

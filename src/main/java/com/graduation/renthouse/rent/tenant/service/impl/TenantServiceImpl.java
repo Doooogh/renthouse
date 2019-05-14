@@ -1,5 +1,6 @@
 package com.graduation.renthouse.rent.tenant.service.impl;
 
+import com.graduation.renthouse.system.annotation.InsertLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,7 @@ public class TenantServiceImpl implements TenantService {
 	}
 	
 	@Override
+	@InsertLog("tenant")
 	public int save(TenantDO tenant){
 		return tenantDao.save(tenant);
 	}

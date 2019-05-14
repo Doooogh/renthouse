@@ -20,7 +20,7 @@ public interface TenantService {
 	List<TenantDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
-	@InsertLog("landlord")
+
 	int save(TenantDO tenant);
 	
 	int update(TenantDO tenant);

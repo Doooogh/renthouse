@@ -53,7 +53,7 @@ public class LoginController {
             return R.error(1,"账号不存在");
         }
         System.out.println(subject.getSession().getAttribute("user")+"---------------------------00000000000000");
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             subject.login(token);//会跳到我们自定义的realm中
         } catch (Exception e) {

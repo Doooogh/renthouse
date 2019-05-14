@@ -107,7 +107,6 @@ public class LandlordController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("landlord:landlord:add")
-	@InsertLog("landlord")
 	public R save( LandlordDO landlord){
 		if(landlordService.save(landlord)>0){
 			return R.ok();

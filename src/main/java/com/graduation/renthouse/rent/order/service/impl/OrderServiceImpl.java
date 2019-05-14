@@ -1,6 +1,7 @@
 package com.graduation.renthouse.rent.order.service.impl;
 
 import com.graduation.renthouse.rent.order.domain.OrderDO;
+import com.graduation.renthouse.system.annotation.InsertLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	@Override
+	@InsertLog("order")
 	public int save(OrderDO order){
 		return orderDao.save(order);
 	}

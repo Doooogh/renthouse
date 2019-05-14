@@ -21,7 +21,7 @@ public interface OrderService {
 	
 	int count(Map<String, Object> map);
 
-	@InsertLog("landlord")
+
 	int save(OrderDO order);
 	
 	int update(OrderDO order);

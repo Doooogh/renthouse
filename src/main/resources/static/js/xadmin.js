@@ -138,13 +138,7 @@ $(function () {
 
         });
 
-        if(getCookie('tab_list')){
-            tab_list = getCookie('tab_list').split(',');
 
-            for (var i in tab_list) {
-                 $('.left-nav #nav li').eq(tab_list[i]).click();
-            }
-         }
     });
 
     //触发事件
@@ -331,14 +325,7 @@ $(function () {
          
     })
 
-    // 左侧菜单记忆功能
-    if(getCookie('left_menu_father')!=null){
-        $('.left-nav #nav li').eq(getCookie('left_menu_father')).click();
-    }
 
-    if(getCookie('left_menu_son')!=null){
-        $('.left-nav #nav li').eq(getCookie('left_menu_son')).click();
-    }
      
      
      

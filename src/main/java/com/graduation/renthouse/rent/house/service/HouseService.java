@@ -29,7 +29,7 @@ public interface HouseService {
 
 	int countByTitle(Map<String, Object> map);
 
-	@InsertLog("landlord")
+
 	int save(HouseDO house);
 	
 	int update(HouseDO house);

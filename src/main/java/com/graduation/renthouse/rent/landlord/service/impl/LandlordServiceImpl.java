@@ -6,6 +6,7 @@ import com.google.common.base.CaseFormat;
 import com.graduation.renthouse.rent.house.dao.HouseDao;
 import com.graduation.renthouse.rent.house.domain.HouseDO;
 import com.graduation.renthouse.rent.landlord.domain.LandlordVO;
+import com.graduation.renthouse.system.annotation.InsertLog;
 import com.graduation.renthouse.system.common.Constant;
 import com.graduation.renthouse.system.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,7 @@ public class LandlordServiceImpl implements LandlordService {
 	}
 	
 	@Override
+	@InsertLog("landlord")
 	public int save(LandlordDO landlord){
 		return landlordDao.save(landlord);
 	}

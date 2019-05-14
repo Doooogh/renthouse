@@ -13,7 +13,7 @@ function load() {
                         parentCode: 'parentId',
                         type: "GET", // 请求数据的ajax类型
                         url: prefix + '/list', // 请求数据的ajax的url
-                        ajaxParams: {sort:'img'}, // 请求数据的ajax的data属性
+                        // ajaxParams: {sort:'img'}, // 请求数据的ajax的data属性
                         expandColumn: '1',// 在哪一列上面显示展开按钮
                         striped: true, // 是否各行渐变色
                         bordered: true, // 是否显示边框
@@ -46,6 +46,10 @@ function load() {
 									{
 										field : 'url',
 										title : '地址'
+									},
+									{
+										field : 'sort',
+										title : '排序'
 									},
 								{
 									field : 'permission',

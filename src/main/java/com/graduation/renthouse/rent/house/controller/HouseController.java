@@ -131,9 +131,7 @@ public class HouseController {
 
 	    int total=0;
         Set<String> set = params.keySet();
-        for (String s : set) {
-            System.out.println(s+",------------"+params.get(s)+"___________________"+s.getClass());
-        }
+
         List<HouseDO> houseList=new ArrayList<>();
         Query query = new Query(params);
         String which= (String) params.get("which");
@@ -148,7 +146,6 @@ public class HouseController {
             houseList = houseService.findByTitle(query);
 			total=houseService.countByTitle(query);
         }
-		System.out.println(houseList.size()+"6666666666666666666666666");
 		List<HouseVO> houses=new ArrayList<>();
 		Map<String,Object> newMap=new HashMap<>();
 		List<TagDO> tags = tagService.list(newMap);
@@ -183,6 +180,7 @@ public class HouseController {
 		PageUtils pageUtils=new PageUtils(houses,total);
 		return  pageUtils;
 	}
+
 	@GetMapping("/add")
 	@RequiresPermissions("house:house:add")
 	String add(Model model){

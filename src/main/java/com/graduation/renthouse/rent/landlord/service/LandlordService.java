@@ -23,7 +23,7 @@ public interface LandlordService {
 	
 	int count(Map<String, Object> map);
 
-	@InsertLog("landlord")
+
 	int save(LandlordDO landlord);
 	
 	int update(LandlordDO landlord);

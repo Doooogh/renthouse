@@ -4,16 +4,17 @@
 <mapper namespace="com.graduation.renthouse.rent.permission.dao.PermissionDao">
 
 	<select id="get" resultType="com.graduation.renthouse.rent.permission.domain.PermissionDO">
-		select `id`,`parent_id`,`name`,`url`,`permission`,`type`,`img`,`createtime`,`updatetime` from permission where id = #{value}
+		select `id`,`parent_id`,`name`,`url`,`permission`,`type`,`img`,`sort`,`createtime`,`updatetime` from permission where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.graduation.renthouse.rent.permission.domain.PermissionDO">
-		select `id`,`parent_id`,`name`,`url`,`permission`,`type`,`img`,`createtime`,`updatetime` from permission
+		select `id`,`parent_id`,`name`,`url`,`permission`,`type`,`img`,`sort`,`createtime`,`updatetime` from permission
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
 		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="sort != null and sort != ''"> and sort = #{sort} </if>
 		  		  <if test="permission != null and permission != ''"> and permission = #{permission} </if>
 		  		  <if test="type != null and type != ''"> and type = #{type} </if>
 		  		  <if test="img != null and img != ''"> and img = #{img} </if>
@@ -22,7 +23,7 @@
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
+                order by ${sortClu} ${order}
             </when>
 			<otherwise>
                 order by id
@@ -43,7 +44,8 @@
 			      <if test="permission != null and permission != ''"> and permission = #{permission} </if>
 		  		  <if test="type != null and type != ''"> and type = #{type} </if>
 		  		  <if test="img != null and img != ''"> and img = #{img} </if>
-		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
+			 	  <if test="sort != null and sort != ''"> and sort = #{sort} </if>
+			      <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
 		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
 		  		</where>
 	</select>
@@ -57,6 +59,7 @@
 			`permission`, 
 			`type`, 
 			`img`,
+			`sort`,
 			`createtime`, 
 			`updatetime`
 		)
@@ -68,6 +71,7 @@
 			#{permission},
 			#{type}, 
 			#{img},
+			#{sort},
 			#{createtime}, 
 			#{updatetime}
 		)
@@ -81,6 +85,7 @@
 			<if test="url != null "> url = #{url}, </if>
 			<if test="permission != null">`permission` = #{permission}, </if>
 			<if test="type != null">`type` = #{type}, </if>
+			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
 			<if test="img != null">`img` = #{img}, </if>
 			<if test="createtime != null">`createtime` = #{createtime}, </if>
 			<if test="updatetime != null">`updatetime` = #{updatetime}</if>
@@ -100,7 +105,7 @@
 	</delete>
 
 	<select id="selectByRoles" resultType="com.graduation.renthouse.rent.permission.domain.PermissionDO">
-		select `id`,`parent_id`,`name`,`url`,`permission`,`type`,`img`,`createtime`,`updatetime` from permission where `id` in
+		select `id`,`parent_id`,`name`,`url`,`permission`,`type`,`img`,`sort`,`createtime`,`updatetime` from permission where `id` in
 		select per_id from role_per where role_id in
 		<foreach item="item" index="index" collection="list"
 				 separator=",">

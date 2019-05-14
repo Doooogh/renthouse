@@ -2,10 +2,7 @@ package com.graduation.renthouse.system.utils;
 
 import com.graduation.renthouse.rent.common.entity.Tree;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BuildTree {
 
@@ -83,6 +80,32 @@ public class BuildTree {
 			}
 
 		}
+
+			Collections.sort(topNodes, new Comparator<Tree<T>>() {
+				@Override
+				public int compare(Tree<T> o1, Tree<T> o2) {
+
+					//按照Person的年龄进行升序排列
+					Integer o1Sort= (Integer) o1.getAttributes().get("sort");
+					Integer o2Sort= (Integer) o2.getAttributes().get("sort");
+					if(o1Sort==null){
+						o1Sort=0;
+					}
+					if(o2Sort==null){
+						o2Sort=0;
+					}
+					if(o1Sort > o2Sort){
+						return 1;
+					}
+					if(o1Sort == o2Sort){
+						return 0;
+					}
+					return -1;
+
+				}
+			});
+
+
 		return topNodes;
 	}
 
