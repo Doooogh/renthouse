@@ -226,4 +226,10 @@ public class DateUtils {
         Date date2 = parseMonth("2018-09", "yyyy-MM");
         System.out.println(date2);
     }
+
+    public static String getMonthFirstDate(){
+       return format(monthFirstDate(new Date()),DATE_TIME_PATTERN) ;
+    }
+
+
 }

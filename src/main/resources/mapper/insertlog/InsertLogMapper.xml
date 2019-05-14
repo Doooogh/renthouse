@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.graduation.renthouse.rent.insertlog.dao.InsertLogDao">
+
+	<select id="get" resultType="com.graduation.renthouse.rent.insertlog.domain.InsertLogDO">
+		select `id`,`insert_type`,`type`,`create_uid`,`create_time`,`update_time` from insert_log where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.graduation.renthouse.rent.insertlog.domain.InsertLogDO">
+		select `id`,`insert_type`,`type`,`create_uid`,`create_time`,`update_time` from insert_log
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="insertType != null and insertType != ''"> and insert_type = #{insertType} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="createUid != null and createUid != ''"> and create_uid = #{createUid} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from insert_log
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="insertType != null and insertType != ''"> and insert_type = #{insertType} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="createUid != null and createUid != ''"> and create_uid = #{createUid} </if>
+		  		  <if test="createTime != null and createTime != ''"> and create_time = #{createTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.graduation.renthouse.rent.insertlog.domain.InsertLogDO" useGeneratedKeys="true" keyProperty="id">
+		insert into insert_log
+		(
+			`insert_type`, 
+			`type`, 
+			`create_uid`, 
+			`create_time`, 
+			`update_time`
+		)
+		values
+		(
+			#{insertType}, 
+			#{type}, 
+			#{createUid}, 
+			#{createTime}, 
+			#{updateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.graduation.renthouse.rent.insertlog.domain.InsertLogDO">
+		update insert_log 
+		<set>
+			<if test="insertType != null">`insert_type` = #{insertType}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="createUid != null">`create_uid` = #{createUid}, </if>
+			<if test="createTime != null">`create_time` = #{createTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from insert_log where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from insert_log where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

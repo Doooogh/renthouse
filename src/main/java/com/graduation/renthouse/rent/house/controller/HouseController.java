@@ -78,10 +78,7 @@ public class HouseController {
         Query query = new Query(params);
 		System.out.println(params.get("limit").getClass());
 	    List<HouseDO> houseList=houseService.list(query);
-
 		//查询列表数据
-
-
 		List<House> houses=new ArrayList<>();
 		String tenantName="";
 		String landlordName="";

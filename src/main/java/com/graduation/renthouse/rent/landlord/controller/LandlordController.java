@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.graduation.renthouse.rent.house.service.HouseService;
 import com.graduation.renthouse.rent.landlord.domain.LandlordVO;
+import com.graduation.renthouse.system.annotation.InsertLog;
 import com.graduation.renthouse.system.utils.PageUtils;
 import com.graduation.renthouse.system.utils.Query;
 import com.graduation.renthouse.system.utils.R;
@@ -106,6 +107,7 @@ public class LandlordController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("landlord:landlord:add")
+	@InsertLog("landlord")
 	public R save( LandlordDO landlord){
 		if(landlordService.save(landlord)>0){
 			return R.ok();

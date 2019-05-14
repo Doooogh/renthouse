@@ -1,6 +1,7 @@
 package com.graduation.renthouse.rent.house.service;
 
 import com.graduation.renthouse.rent.house.domain.HouseDO;
+import com.graduation.renthouse.system.annotation.InsertLog;
 
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,8 @@ public interface HouseService {
 	int countByMore(Map<String, Object> map);
 
 	int countByTitle(Map<String, Object> map);
-	
+
+	@InsertLog("landlord")
 	int save(HouseDO house);
 	
 	int update(HouseDO house);
