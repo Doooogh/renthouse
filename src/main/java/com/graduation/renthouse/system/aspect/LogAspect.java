@@ -41,7 +41,7 @@ public class LogAspect {
     }
 
 
-    @Before("logPointCut()")
+    @Around("logPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
         long beginTime = System.currentTimeMillis();
         // 执行方法

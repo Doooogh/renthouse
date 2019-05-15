@@ -49,7 +49,7 @@ public class InsertAspect {
     public void test1(){
         System.out.println("前置通知");
     }
-    @AfterReturning("InsertLogPointCut()")
+    @Before("InsertLogPointCut()")
     public void after(JoinPoint point) throws Throwable {
         long beginTime = System.currentTimeMillis();
         // 执行方法
