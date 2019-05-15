@@ -1,5 +1,6 @@
 package com.graduation.renthouse.rent.house.service.impl;
 
+import com.graduation.renthouse.system.annotation.InsertLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +54,7 @@ public class HouseServiceImpl implements HouseService {
 	}
 
 	@Override
+	@InsertLog("house")
 	public int save(HouseDO house){
 		return houseDao.save(house);
 	}

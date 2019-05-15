@@ -27,8 +27,10 @@ public class PermissionDO implements Serializable {
 	private String permission;
 	//类型
 	private Integer type;
-	//排序
+	//图标
 	private String img;
+	//排序
+	private Integer sort;
 	//创建时间
 	private Date createtime;
 	//修改时间
@@ -63,8 +65,18 @@ public class PermissionDO implements Serializable {
 	public Integer getId() {
 		return id;
 	}
+
+	public Integer getSort() {
+		return sort;
+	}
+
+	public void setSort(Integer sort) {
+		this.sort = sort;
+	}
+
 	/**
 	 * 设置：父id
+
 	 */
 	public void setParentId(Integer parentId) {
 		this.parentId = parentId;

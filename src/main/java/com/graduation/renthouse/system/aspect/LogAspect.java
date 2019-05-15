@@ -11,9 +11,7 @@ import com.graduation.renthouse.system.utils.IPUtils;
 import com.graduation.renthouse.system.utils.JSONUtils;
 import com.graduation.renthouse.system.utils.ShiroUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +20,9 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Aspect
 @Component
@@ -40,7 +40,8 @@ public class LogAspect {
     public void logPointCut() {
     }
 
-    @Around("logPointCut()")
+
+    @Before("logPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
         long beginTime = System.currentTimeMillis();
         // 执行方法
@@ -68,7 +69,7 @@ public class LogAspect {
         // 请求的参数
         Object[] args = joinPoint.getArgs();
         try {
-            String params = JSONUtils.beanToJson(args[0]).substring(0, 4999);
+            String params = JSONUtils.beanToJson(args);
             sysLog.setParams(params);
         } catch (Exception e) {
 

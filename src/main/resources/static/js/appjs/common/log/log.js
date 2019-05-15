@@ -42,9 +42,10 @@ function load() {
                         offset: params.offset,
                         name: $('#searchName').val(),
                         sort: params.sort,      //排序列名
-                        sortOrder: params.order, //排位命令（desc，asc）
+                        order: params.order, //排位命令（desc，asc）
                         operation: $("#searchOperation").val(),
-                        username: $("#searchUsername").val()
+                        username: $("#searchUsername").val(),
+
                     };
                 },
                 // //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果

@@ -1,6 +1,7 @@
 package com.graduation.renthouse.rent.order.service;
 
 import com.graduation.renthouse.rent.order.domain.OrderDO;
+import com.graduation.renthouse.system.annotation.InsertLog;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,8 @@ public interface OrderService {
 	List<OrderDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
-	
+
+
 	int save(OrderDO order);
 	
 	int update(OrderDO order);

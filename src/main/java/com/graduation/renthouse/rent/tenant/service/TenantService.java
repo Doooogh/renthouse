@@ -1,6 +1,7 @@
 package com.graduation.renthouse.rent.tenant.service;
 
 import com.graduation.renthouse.rent.tenant.domain.TenantDO;
+import com.graduation.renthouse.system.annotation.InsertLog;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,7 @@ public interface TenantService {
 	List<TenantDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
-	
+
 	int save(TenantDO tenant);
 	
 	int update(TenantDO tenant);

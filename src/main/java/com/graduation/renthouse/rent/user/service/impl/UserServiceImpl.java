@@ -149,6 +149,9 @@ public class UserServiceImpl implements UserService {
 			attributes.put("url",per.getUrl());
 			attributes.put("img",per.getImg());
 			attributes.put("type",per.getType());
+			if(per.getSort()!=null){
+				attributes.put("sort",per.getSort());
+			}
 			tree.setAttributes(attributes);
 			Integer perId = per.getId();
 			state.put("selected", false);

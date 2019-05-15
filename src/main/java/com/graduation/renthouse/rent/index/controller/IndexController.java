@@ -48,6 +48,7 @@ public class IndexController {
         Integer userId=user.getUserId();
         System.out.println("用户名为："+username+"-----ID为："+userId);
         Set<PermissionDO> permissionsSets = userService.getPermissionsByUserId(userId);
+
         List<Tree<PermissionDO>> trees = BuildTree.buildList(userService.getTree(permissionsSets),"0");
         model.addAttribute("trees",trees);
         model.addAttribute("username",username);

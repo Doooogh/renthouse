@@ -47,7 +47,7 @@ public class PermissionController {
 	
 	@ResponseBody
 	@GetMapping("/list")
-//	@RequiresPermissions("permission:permission:permission")
+	@RequiresPermissions("permission:permission:permission")
 	public List<PermissionDO> list(@RequestParam Map<String, Object> params){
 		List<PermissionDO> permissionList=permissionService.list(params);
 		return permissionList;

@@ -119,9 +119,9 @@
     </select>
 
 	<select id="getPermissionsByUserId" resultType="com.graduation.renthouse.rent.permission.domain.PermissionDO">
-		select  `id`,`parent_id`,`name`,`url`,`permission`,`type`,`img`,`createtime`,`updatetime` from permission where id in
+		select  `id`,`parent_id`,`name`,`url`,`permission`,`type`,`img`,`sort`,`createtime`,`updatetime` from permission where id in
 		(select per_id from role_per where role_id in
-		(select role_id from user_role where user_id=#{userId})) order by `id`
+		(select role_id from user_role where user_id=#{userId})) order by `sort`
 	</select>
 
 </mapper>

@@ -26,7 +26,7 @@
             </when>
 			<otherwise>
                 order by id desc
-			</otherwise>
+		</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
