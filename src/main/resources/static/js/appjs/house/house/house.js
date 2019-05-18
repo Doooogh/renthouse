@@ -90,7 +90,15 @@ function load() {
 																{
 									field : 'description', 
 									title : '房屋描述' 
-								},								{
+								},
+								{
+									field : 'id',
+									title : '房屋标签',
+									formatter:function (value,row,index) {
+                                        var str='<a style="text-decoration:none" onclick="showTag(\''+value+'\')">'+'查看'+'</a>';
+                                        return str;
+                                    }
+								},{
 									field:'id',
 									title:'房屋图片',
 									width: 120,
@@ -340,5 +348,16 @@ function showPic(id) {
         shadeClose : false, // 点击遮罩关闭层
         area : [ '800px', '480px' ],
         content : prefix + '/showPic/'+id
+    });
+}
+function showTag(houseId) {
+    layer.open({
+        type : 2,
+        title : '标签管理',
+        maxmin : true,
+        scrollbar: false,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '600px', '350px' ],
+        content :  '/tag/tag/showTag/'+houseId
     });
 }

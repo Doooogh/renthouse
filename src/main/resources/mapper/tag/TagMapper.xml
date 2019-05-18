@@ -4,15 +4,15 @@
 <mapper namespace="com.graduation.renthouse.rent.tag.dao.TagDao">
 
 	<select id="get" resultType="com.graduation.renthouse.rent.tag.domain.TagDO">
-		select `id`,`description`,`house_id` from tag where id = #{value}
+		select `id`,`description` from tag where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.graduation.renthouse.rent.tag.domain.TagDO">
-		select `id`,`description`,`house_id` from tag
+		select `id`,`description` from tag
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="description != null and description != ''"> and description = #{description} </if>
-		  		  <if test="houseId != null and houseId != ''"> and house_id = #{houseId} </if>
+
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -39,21 +39,21 @@
 	<insert id="save" parameterType="com.graduation.renthouse.rent.tag.domain.TagDO" useGeneratedKeys="true" keyProperty="id">
 		insert into tag
 		(
-			`description`, 
-			`house_id`
+			`description`
+
 		)
 		values
 		(
-			#{description}, 
-			#{houseId}
+			#{description}
+
 		)
 	</insert>
 	 
 	<update id="update" parameterType="com.graduation.renthouse.rent.tag.domain.TagDO">
 		update tag 
 		<set>
-			<if test="description != null">`description` = #{description}, </if>
-			<if test="houseId != null">`house_id` = #{houseId}</if>
+			<if test="description != null">`description` = #{description} </if>
+
 		</set>
 		where id = #{id}
 	</update>

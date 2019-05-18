@@ -1,13 +1,20 @@
 package com.graduation.renthouse.rent.tag.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.graduation.renthouse.rent.tag.domain.TagHouse;
+import com.graduation.renthouse.rent.tag.domain.TagVO;
+import com.graduation.renthouse.rent.tag.service.TagHouseService;
 import com.graduation.renthouse.system.utils.PageUtils;
 import com.graduation.renthouse.system.utils.Query;
 import com.graduation.renthouse.system.utils.R;
+import jdk.nashorn.internal.codegen.ObjectClassGenerator;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +41,9 @@ import com.graduation.renthouse.rent.tag.service.TagService;
 public class TagController {
 	@Autowired
 	private TagService tagService;
+
+	@Autowired
+	private TagHouseService tagHouseService;
 	
 	@GetMapping()
 	@RequiresPermissions("tag:tag:tag")
@@ -112,6 +122,61 @@ public class TagController {
 	public R remove(@RequestParam("ids[]") Integer[] ids){
 		tagService.batchRemove(ids);
 		return R.ok();
+	}
+
+	@GetMapping("/showTag/{houseId}")
+	public String showTag(@PathVariable("houseId") Integer houseId,Model model) throws Exception {
+		Map<String,Object> map=new HashMap();
+		List<TagDO> allTag = tagService.list(map);
+		map.clear();
+		if(houseId==null){
+			throw  new Exception("传递参数为null");
+		}
+			map.put("houseId",houseId);
+			List<TagHouse> houseTags = tagHouseService.list(map);
+			List<TagVO> tagVOS=new ArrayList<>();
+		for (TagDO tagDO : allTag) {
+			TagVO tagVO=new TagVO();
+			tagVO.setId(tagDO.getId());
+			tagVO.setDescription(tagDO.getDescription());
+			if(houseTags.size()!=0){
+				for (TagHouse houseTag : houseTags) {
+					if(houseTag.getTagId()==tagDO.getId()){
+						tagVO.setHas(true);
+						break;
+					}
+				}
+			}
+			tagVOS.add(tagVO);
+		}
+			model.addAttribute("allTag",tagVOS);
+
+
+
+		return "/tag/tag/selecttag";
+	}
+
+	@PostMapping("/changeTags")
+	@ResponseBody
+	@Transactional
+	public R changeTags(Integer[] tagIds,Integer houseId ) throws Exception {
+
+		List<Integer> tagHouseIds=tagHouseService.getTagIds(houseId);
+		tagHouseService.batchRemove(tagHouseIds);
+
+		List<TagHouse> tagHouses=new ArrayList<>();
+
+		for (Integer tagId : tagIds) {
+			TagHouse tagHouse=new TagHouse();
+			tagHouse.setHouseId(houseId);
+			tagHouse.setTagId(tagId);
+			tagHouses.add(tagHouse);
+		}
+		int a=tagHouseService.batchSave(tagHouses);
+		if(a>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 }

@@ -85,7 +85,7 @@
 			<if test="url != null "> url = #{url}, </if>
 			<if test="permission != null">`permission` = #{permission}, </if>
 			<if test="type != null">`type` = #{type}, </if>
-			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
+			<if test="sort != null and sort != ''"> sort = #{sort} </if>
 			<if test="img != null">`img` = #{img}, </if>
 			<if test="createtime != null">`createtime` = #{createtime}, </if>
 			<if test="updatetime != null">`updatetime` = #{updatetime}</if>

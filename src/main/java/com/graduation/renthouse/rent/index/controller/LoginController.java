@@ -74,6 +74,9 @@ public class LoginController {
             }
             return  R.error(4,"没有权限");
         }
+        if(user.getStatus()!=1){
+            return R.error("该用户已经被禁用");
+        }
         return R.ok();
 
 

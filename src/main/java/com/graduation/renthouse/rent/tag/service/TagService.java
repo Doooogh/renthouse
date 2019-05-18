@@ -27,4 +27,6 @@ public interface TagService {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+
 }

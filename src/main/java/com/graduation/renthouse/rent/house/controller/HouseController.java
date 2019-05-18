@@ -15,6 +15,7 @@ import com.graduation.renthouse.rent.landlord.domain.LandlordDO;
 import com.graduation.renthouse.rent.landlord.domain.LandlordVO;
 import com.graduation.renthouse.rent.landlord.service.LandlordService;
 import com.graduation.renthouse.rent.tag.domain.TagDO;
+import com.graduation.renthouse.rent.tag.service.TagHouseService;
 import com.graduation.renthouse.rent.tag.service.TagService;
 import com.graduation.renthouse.rent.tenant.domain.TenantDO;
 import com.graduation.renthouse.rent.tenant.service.TenantService;
@@ -64,6 +65,9 @@ public class HouseController {
 	@Autowired
 	private ImgService imgService;
 
+	@Autowired
+	private TagHouseService tagHouseService;
+
 	
 	@GetMapping()
 	@RequiresPermissions("house:house:house")
@@ -94,8 +98,10 @@ public class HouseController {
             	Integer tenantId=houseDO.getTenantId();
             	if(tenantId==null){
 					tenantName="";
+				}else{
+					tenantName=tenantService.get(houseDO.getTenantId()).getName();
 				}
-				 tenantName=tenantService.get(houseDO.getTenantId()).getName();
+
 			}catch (Exception e){
             	e.printStackTrace();
 			}
@@ -293,7 +299,7 @@ public class HouseController {
     	LandlordDO landlord=landlordService.get(houseDO.getLandlordId());
     	Map <String,Object> map=new HashMap<>();
     	map.put("houseId",houseDO.getId());
-    	List<TagDO>tags=tagService.list(map);
+		List<TagDO>tags=tagHouseService.getTagsByHouseId(houseDO.getId());
     	List<ImgDO> imgs=imgService.list(map);
     	String landlordName=null;
     	if(landlord.getSex().equals("男")){

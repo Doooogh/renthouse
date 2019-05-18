@@ -55,11 +55,7 @@ function load() {
 									field : 'description', 
 									title : '标题描述' 
 								},
-																{
-									field : 'houseId', 
-									title : '房屋id' 
-								},
-																{
+								{
 									title : '操作',
 									field : 'id',
 									align : 'center',

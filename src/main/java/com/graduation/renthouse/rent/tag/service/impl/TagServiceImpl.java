@@ -3,6 +3,7 @@ package com.graduation.renthouse.rent.tag.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,5 +52,7 @@ public class TagServiceImpl implements TagService {
 	public int batchRemove(Integer[] ids){
 		return tagDao.batchRemove(ids);
 	}
-	
+
+
+
 }

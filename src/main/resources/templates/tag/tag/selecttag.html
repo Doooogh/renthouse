@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include :: header"></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+.tag_click{
+
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+    text-align: center;
+    color: #edece8;
+    background-color: rgba(255, 50, 42, 0.73);
+    border-radius: 2px;
+    margin-right: 6px;
+}
+.tag_no_click{
+    width: 70px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+    text-align: center;
+    color: #849aae;
+    background-color: rgba(132,154,174,.1);
+    border-radius: 2px;
+    margin-right: 6px;
+}
+
+
+</style>
+<body>
+    <div class="body">
+       <input type="hidden" id="houseId" th:value="${houseId}">
+        <div class="panel panel-info" style="padding: 20px;height: 300px">
+            <div style="width: 100%;height: 90%;display: flex;justify-content: flex-start; flex-wrap:wrap">
+                <div th:each="tag:${allTag}"  style="display: flex;justify-content: flex-start;margin: 10px;height: 30px;align-content: flex-start;align-items: flex-start">
+                        <a href="#"  >
+                            <div th:text="${tag.description}"  th:class="${tag.has}?'tag_click tag':'tag_no_click tag'" th:attr="tagId=${tag.id}"></div>
+                        </a>
+                </div>
+
+            </div>
+            <button type="button" class="btn btn-info" id="tag_submit"style="margin-right: 20px;float: right">提交</button>
+        </div>
+    </div>
+    <div th:include="include :: footer"></div>
+</body>
+<script>
+    $(function () {
+        changeStstus();
+        $("#tag_submit").click(function () {
+            submitSatus();
+        });
+    });
+    function changeStstus() {
+        $(".tag").click(function () {
+            var tagClass=$(this).hasClass("tag_click");
+            if(tagClass){
+                $(this).removeClass("tag_click").addClass("tag_no_click");
+            }else{
+                $(this).removeClass("tag_no_click").addClass("tag_click");
+            }
+        });
+    }
+
+    function submitSatus() {
+        var suceesssStatus=0;
+        var houseId=$("#houseId").val();
+
+        var tagIds=new Array();
+        $(".tag_click").each(function (index) {
+            tagIds.push($(this).attr("tagId"));
+        });
+        if(tagIds.length>0){
+            suceesssStatus=1;
+        }
+        if(suceesssStatus>0){
+            $.ajax({
+                url:'/tag/tag/changeTags',
+                type:'POST',
+                dataType:'json',
+                traditional: true,
+                data:{
+                    houseId:houseId,
+                    tagIds:tagIds
+                },
+                success:function (data) {
+                    if(data.code==0){
+                        parent.layer.msg("操作成功");
+                        var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                        parent.layer.close(index);
+                    }else{
+                        parent.layer.msg("操作失败");
+                    }
+                },
+                error:function () {
+                    parent.layer.msg("服务器错误");
+                }
+            });
+        }else{
+            parent.layer.msg("必须为房屋设置标签");
+        }
+
+
+    }
+</script>
+</html>
