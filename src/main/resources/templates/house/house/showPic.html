@@ -29,12 +29,7 @@
                                 <span class="pre s_title"><a href="#">预览</a></span>
                             </p>
                         </div>
-                        <div class="pre_view s_content">
-                            <p>
-                                <span class="glyphicon glyphicon-cloud-upload" ></span>
-                                <button id="imgLoad" type="button" class="btn btn-info btn-xs">上传</button>
-                            </p>
-                        </div>
+
                     </div>
                 </div>
                 <input id="houseId" type="hidden" th:value="${houseId}"/>
@@ -47,7 +42,6 @@
                         <li class="img_content"  th:each="img:${imgs}">
                             <img th:src="${'/img/'+img.src}" alt="" >
                             <div class="img_select" style="height: 20%">
-                                <button class="btn btn-warning btn-xs copy btn_edit " th:attr="img_id=${img.id}">编辑</button>
                                 <button class="btn btn-danger btn-xs btn_delete"  th:attr="img_id=${img.id}">删除</button>
                             </div>
                         </li>

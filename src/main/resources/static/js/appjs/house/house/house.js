@@ -211,7 +211,7 @@ function load() {
 											str="已出租";
 										}else if(value==0) {
 											str="未出租";
-										}else{
+										}else if(value==2){
 											str="以预约"
 										}
 										return str;

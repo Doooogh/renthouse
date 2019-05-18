@@ -135,8 +135,8 @@
 			`broad_band`, 
 			`wardrobe`, 
 			`createtime`, 
-			`updatetime`, 
-			`status`
+			`updatetime`
+
 		)
 		values
 		(
@@ -160,8 +160,8 @@
 			#{broadBand}, 
 			#{wardrobe}, 
 			#{createtime}, 
-			#{updatetime}, 
-			#{status}
+			#{updatetime}
+
 		)
 	</insert>
 	 

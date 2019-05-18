@@ -4,9 +4,9 @@
 <mapper namespace="com.graduation.renthouse.rent.insertlog.dao.InsertLogExDao">
 
     <select id="report" resultType="com.graduation.renthouse.rent.report.domain.WelcomeReport">
-        select insert_type as type ,sum(id) num ,DATE_FORMAT(create_time,'%Y-%m-%d') as date from insert_log
+        select insert_type as type ,count(id) num ,DATE_FORMAT(create_time,'%Y-%m-%d') as date from insert_log
         <where>
-            <if test="start!=null and start !='' and end !=null and end!=''">and create_time between DATE_FORMAT(#{start},'%Y%m%d%h%i%s')and DATE_FORMAT(#{end},'%Y%m%d%h%i%s') </if>
+            <if test="start!=null and start !='' and end !=null and end!=''">and create_time between #{start}and #{end} </if>
         </where>
         group by insert_type,DATE_FORMAT(create_time,'%Y-%m-%d')
     </select>

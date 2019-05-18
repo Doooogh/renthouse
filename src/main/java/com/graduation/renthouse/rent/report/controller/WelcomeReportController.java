@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -20,7 +21,9 @@ public class WelcomeReportController {
 
     @GetMapping("/welcomeReport")
     @ResponseBody
-    public EChartLine welcomeReport(Map<String,Object> map){
+    public EChartLine welcomeReport(String rangeDate){
+        Map<String,Object> map=new HashMap<>();
+        map.put("rangeDate",rangeDate);
         return welcomeInsertService.welcomeList(map);
     }
 

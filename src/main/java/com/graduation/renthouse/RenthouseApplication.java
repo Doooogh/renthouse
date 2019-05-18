@@ -7,11 +7,13 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @MapperScan(basePackages = {"com.**.dao"})
 @EnableCaching
 @EnableAspectJAutoProxy
+@EnableTransactionManagement
 public class RenthouseApplication  extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

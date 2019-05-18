@@ -29,7 +29,6 @@ public interface HouseService {
 
 	int countByTitle(Map<String, Object> map);
 
-
 	int save(HouseDO house);
 	
 	int update(HouseDO house);
@@ -37,4 +36,6 @@ public interface HouseService {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+
+
 }
