@@ -55,6 +55,8 @@ public class HouseDO implements Serializable {
 	private Integer broadBand;
 	//是否有衣柜
 	private Integer wardrobe;
+
+	private Integer uId;
 	//
 	private Date createtime;
 	//
@@ -115,6 +117,15 @@ public class HouseDO implements Serializable {
 	public String getTitle() {
 		return title;
 	}
+
+	public Integer getuId() {
+		return uId;
+	}
+
+	public void setuId(Integer uId) {
+		this.uId = uId;
+	}
+
 	/**
 	 * 设置：大范围地址
 	 */

@@ -19,10 +19,8 @@ import com.graduation.renthouse.rent.tag.service.TagHouseService;
 import com.graduation.renthouse.rent.tag.service.TagService;
 import com.graduation.renthouse.rent.tenant.domain.TenantDO;
 import com.graduation.renthouse.rent.tenant.service.TenantService;
-import com.graduation.renthouse.system.utils.DateUtils;
-import com.graduation.renthouse.system.utils.PageUtils;
-import com.graduation.renthouse.system.utils.Query;
-import com.graduation.renthouse.system.utils.R;
+import com.graduation.renthouse.rent.user.domain.UserDO;
+import com.graduation.renthouse.system.utils.*;
 import jdk.nashorn.internal.codegen.ObjectClassGenerator;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.BeanUtils;
@@ -79,8 +77,8 @@ public class HouseController {
 	@GetMapping("/list")
 	@RequiresPermissions("house:house:house")
 	public PageUtils list(@RequestParam Map<String, Object> params){
-        Query query = new Query(params);
-	    List<HouseDO> houseList=houseService.list(query);
+		Query query = new Query(params);
+		List<HouseDO> houseList=houseService.list(query);
 		//查询列表数据
 		List<House> houses=new ArrayList<>();
 		String tenantName="";
@@ -130,6 +128,7 @@ public class HouseController {
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
+
 
 	    int total=0;
         Set<String> set = params.keySet();
@@ -214,6 +213,7 @@ public class HouseController {
 	@PostMapping("/save")
 //	@RequiresPermissions("house:house:add")
 	public R save( HouseDO house){
+
 		house.setCreatetime(new Date());
 		if(houseService.save(house)>0){
 			return R.ok();

@@ -4,16 +4,17 @@
 <mapper namespace="com.graduation.renthouse.rent.house.dao.HouseDao">
 
 	<select id="get" resultType="com.graduation.renthouse.rent.house.domain.HouseDO">
-		select `id`,`title`,`large_areas`,`small_areas`,`square_meter`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house where id = #{id}
+		select `id`,`title`,`large_areas`,`small_areas`,`square_meter`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`u_id`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house where id = #{id}
 	</select>
 
 	<select id="list" resultType="com.graduation.renthouse.rent.house.domain.HouseDO">
-		select `id`,`title`,`large_areas`,`small_areas`,`square_meter`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house
+		select `id`,`title`,`large_areas`,`small_areas`,`square_meter`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`u_id`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="title != null and title != ''"> and title =#{title} </if>
 		  		  <if test="largeAreas != null and largeAreas != ''"> and large_areas = #{largeAreas} </if>
-			      <if test="status != null and status != ''"> and status = #{status} </if>
+			      <if test="status != null and status != ''"> and `house_status` = #{status} </if>
+			      <if test="uId != null and uId != ''"> and `u_id` = #{uId} </if>
 		  		  <if test="smallAreas != null and smallAreas != ''"> and small_areas = #{smallAreas} </if>
 		  		  <if test="squareMeter != null and squareMeter != ''"> and square_meter = #{squareMeter} </if>
 		  		  <if test="orientation != null and orientation != ''"> and orientation = #{orientation} </if>
@@ -47,14 +48,26 @@
 		</if>
 	</select>
     <select id="findByMore" resultType="com.graduation.renthouse.rent.house.domain.HouseDO">
-      	select `id`,`title`,`large_areas`,`small_areas`,`square_meter`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house
+      	select `id`,`title`,`large_areas`,`small_areas`,`u_id`,`square_meter`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house
         <where>
             <if test="largeAreas != null and largeAreas != ''"> and large_areas=#{largeAreas} </if>
             <if test="orientation != null and orientation != ''"> and orientation=#{orientation} </if>
             <if test="status != null and status != ''"> and status=#{status} </if>
-            <if test="houseType != null and houseType != ''"> and house_type like '${houseType}室%'  </if>
+			<if test="uId != null and uId != ''"> and `u_id` = #{uId} </if>
+			<if test="houseType != null and houseType != ''"> and house_type like '${houseType}室%'  </if>
             <if test="priceStart != null and priceStart != '' and priceEnd != null and priceEnd != ''"> and price between #{priceStart} and #{priceEnd} </if>
         </where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${asc}
+			</when>
+			<otherwise>
+				order by id asc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit ${offset}, ${limit}
+		</if>
     </select>
 	<select id="countByMore" resultType="int">
 		select count(*) from house
@@ -63,18 +76,31 @@
 			<if test="orientation != null and orientation != ''"> and orientation=#{orientation} </if>
 			<if test="houseType != null and houseType != ''"> and house_type like '${houseType}室%'  </if>
 			<if test="status != null and status != ''"> and status=#{status} </if>
+			<if test="uId != null and uId != ''"> and `u_id` = #{uId} </if>
 			<if test="priceStart != null and priceStart != '' and priceEnd != null and priceEnd != ''"> and price between #{priceStart} and #{priceEnd} </if>
 
 		</where>
 	</select>
 
     <select id="findByTitle" resultType="com.graduation.renthouse.rent.house.domain.HouseDO">
-        select `id`,`title`,`large_areas`,`small_areas`,`square_meter`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house
+        select `id`,`title`,`large_areas`,`small_areas`,`square_meter`,`u_id`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house
         <where>
             <if test="title != null and title != ''"> or title like '%${title}%' </if>
 			<if test="status != null and status != ''"> and status=#{status} </if>
+			<if test="uId != null and uId != ''"> and `u_id` = #{uId} </if>
 			<if test="largeAreas != null and largeAreas != ''"> or large_areas like '%${largeAreas}%' </if>
        </where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${asc}
+			</when>
+			<otherwise>
+				order by id asc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit ${offset}, ${limit}
+		</if>
 
     </select>
 	<select id="countByTitle" resultType="int">
@@ -82,6 +108,7 @@
 		<where>
 			<if test="title != null and title != ''"> or title like '%${title}%'</if>
 			<if test="status != null and status != ''"> and status=#{status} </if>
+			<if test="uId != null and uId != ''"> and `u_id` = #{uId} </if>
 			<if test="largeAreas != null and largeAreas != ''"> or large_areas like '%${largeAreas}%'  </if>
 		</where>
 
@@ -112,7 +139,9 @@
 		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
 		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
-		  		</where>
+			 	  <if test="uId != null and uId != ''"> and `u_id` = #{uId} </if>
+
+		 </where>
 	</select>
 	 
 	<insert id="save" parameterType="com.graduation.renthouse.rent.house.domain.HouseDO" useGeneratedKeys="true" keyProperty="id">
@@ -132,7 +161,8 @@
 			`landlord_id`,
 			`tenant_id`,
 			`elevator`, 
-			`tv`, 
+			`tv`,
+
 			`fridge`, 
 			`air_conditioner`, 
 			`broad_band`, 
@@ -157,7 +187,8 @@
 			#{landlordId},
 			#{tenantId},
 			#{elevator}, 
-			#{tv}, 
+			#{tv},
+
 			#{fridge}, 
 			#{airConditioner}, 
 			#{broadBand}, 
@@ -184,7 +215,7 @@
 			<if test="addTime != null">`add_time` = #{addTime}, </if>
 			<if test="landlordId != null">`landlord_id` = #{landlordId}, </if>
 			<if test="tenantId != null ">`tenant_id` = #{tenantId}, </if>
-
+			<if test="uId != null and uId != ''"> and `u_id` = #{uId} </if>
 			<if test="elevator != null">`elevator` = #{elevator}, </if>
 			<if test="tv != null">`tv` = #{tv}, </if>
 			<if test="fridge != null">`fridge` = #{fridge}, </if>

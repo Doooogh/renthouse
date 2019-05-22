@@ -10,6 +10,8 @@ import com.graduation.renthouse.system.utils.HttpContextUtils;
 import com.graduation.renthouse.system.utils.IPUtils;
 import com.graduation.renthouse.system.utils.JSONUtils;
 import com.graduation.renthouse.system.utils.ShiroUtils;
+import com.sun.org.apache.regexp.internal.RE;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -41,19 +43,22 @@ public class LogAspect {
     }
 
 
+
+
     @Around("logPointCut()")
     public Object around(ProceedingJoinPoint point) throws Throwable {
         long beginTime = System.currentTimeMillis();
+
         // 执行方法
         Object result = point.proceed();
         // 执行时长(毫秒)
         long time = System.currentTimeMillis() - beginTime;
-        //异步保存日志
-        saveLog(point, time);
+        saveLog(point,time);
         return result;
     }
 
-    void saveLog(ProceedingJoinPoint joinPoint, long time) throws InterruptedException {
+    public void saveLog(ProceedingJoinPoint joinPoint,long time) throws InterruptedException {
+
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         LogDO sysLog = new LogDO();
@@ -99,5 +104,7 @@ public class LogAspect {
         sysLog.setGmtCreate(date);
         // 保存系统日志
         logService.save(sysLog);
+
     }
+
 }

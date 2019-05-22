@@ -162,8 +162,9 @@ public class TagController {
 	public R changeTags(Integer[] tagIds,Integer houseId ) throws Exception {
 
 		List<Integer> tagHouseIds=tagHouseService.getTagIds(houseId);
-		tagHouseService.batchRemove(tagHouseIds);
-
+		if(tagHouseIds.size()!=0){
+			tagHouseService.batchRemove(tagHouseIds);
+		}
 		List<TagHouse> tagHouses=new ArrayList<>();
 
 		for (Integer tagId : tagIds) {

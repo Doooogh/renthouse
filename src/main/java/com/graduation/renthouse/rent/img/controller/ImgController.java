@@ -97,7 +97,7 @@ public class ImgController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("img:img:remove")
+//	@RequiresPermissions("img:img:remove")
 	public R remove( Integer id){
 		if(imgService.remove(id)>0){
 		return R.ok();
