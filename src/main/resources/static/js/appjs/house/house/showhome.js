@@ -33,6 +33,7 @@ function listen() {
         map['which']="findByTitle";
         load(map);
     });
+
     $(".large_area").click(function () {
         $('.large_area').not(this).removeClass("clickStyle").addClass("notClickStyle");
         $(this).removeClass("notClickStyle").addClass("clickStyle");

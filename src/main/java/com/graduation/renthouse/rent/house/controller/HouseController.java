@@ -80,7 +80,6 @@ public class HouseController {
 	@RequiresPermissions("house:house:house")
 	public PageUtils list(@RequestParam Map<String, Object> params){
         Query query = new Query(params);
-		System.out.println(params.get("limit").getClass());
 	    List<HouseDO> houseList=houseService.list(query);
 		//查询列表数据
 		List<House> houses=new ArrayList<>();
@@ -128,20 +127,15 @@ public class HouseController {
 			String str=URLDecoder.decode(map, "UTF-8");
 			params = JSON.parseObject(str);
 			Set set = params.keySet();
-			for (Object o : set) {
-				System.out.println(o+",-------"+params.get(o));
-			}
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 
 	    int total=0;
         Set<String> set = params.keySet();
-
         List<HouseDO> houseList=new ArrayList<>();
         Query query = new Query(params);
         String which= (String) params.get("which");
-        System.out.println(which+"----------------------------------------");
         if(StringUtils.isEmpty(which)){
             houseList = houseService.list(query);
             total=houseService.count(query);

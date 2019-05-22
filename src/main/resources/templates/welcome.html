@@ -39,7 +39,7 @@
                     </div>
                 </div>
                 <div class="layui-col-md12 row">
-                    <div class="layui-inline layui-col-md12" id="tool" style="padding-right:20px;margin: 10px 20px;display:flex;justify-content:flex-end;z-index: 1">
+                    <div class="layui-inline layui-col-md12" id="tool" style="z-index: 10;padding-right:20px;margin: 10px 20px;display:flex;justify-content:flex-end;z-index: 1">
                         <div>
                             <label class="layui-form-label">时间范围</label>
                             <div class="layui-input-inline">
@@ -59,12 +59,12 @@
                     <tbody>
                         <tr>
                             <td >
-                                <a class="x-a" href="#" target="_blank">新版2.0上线了</a>
+                                <a class="x-a a_btn" href="#" >新版2.0上线了</a>
                             </td>
                         </tr>
                         <tr>
                             <td >
-                                <a class="x-a" href="#" target="_blank">房客qq群</a>
+                                <a class="x-a a_btn" href="#" >房客qq群</a>
                             </td>
                         </tr>
                     </tbody>
@@ -107,12 +107,17 @@
                 , range: true
             });
         });
+
+
     </script>
     <script>
         var prefix="/welcome/report";
         $(function () {
             load();
             find();
+            $(".a_btn").click(function () {
+                parent.layer.msg("逗你玩的！");
+            });
         });
 
 
@@ -146,6 +151,9 @@
 
         function chart(data,id) {
             var  option = {
+                title: {
+                    text: '系统变化'
+                },
                 tooltip: {
                     trigger: 'axis'
                 },

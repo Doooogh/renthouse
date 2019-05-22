@@ -13,7 +13,7 @@
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="title != null and title != ''"> and title =#{title} </if>
 		  		  <if test="largeAreas != null and largeAreas != ''"> and large_areas = #{largeAreas} </if>
-			      <if test="status != null and status != ''"> and `status` = #{status} </if>
+			      <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="smallAreas != null and smallAreas != ''"> and small_areas = #{smallAreas} </if>
 		  		  <if test="squareMeter != null and squareMeter != ''"> and square_meter = #{squareMeter} </if>
 		  		  <if test="orientation != null and orientation != ''"> and orientation = #{orientation} </if>
@@ -33,7 +33,6 @@
 		  		  <if test="wardrobe != null and wardrobe != ''"> and wardrobe = #{wardrobe} </if>
 		  		  <if test="createtime != null and createtime != ''"> and createtime = #{createtime} </if>
 		  		  <if test="updatetime != null and updatetime != ''"> and updatetime = #{updatetime} </if>
-
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -52,6 +51,7 @@
         <where>
             <if test="largeAreas != null and largeAreas != ''"> and large_areas=#{largeAreas} </if>
             <if test="orientation != null and orientation != ''"> and orientation=#{orientation} </if>
+            <if test="status != null and status != ''"> and status=#{status} </if>
             <if test="houseType != null and houseType != ''"> and house_type like '${houseType}室%'  </if>
             <if test="priceStart != null and priceStart != '' and priceEnd != null and priceEnd != ''"> and price between #{priceStart} and #{priceEnd} </if>
         </where>
@@ -62,6 +62,7 @@
 			<if test="largeAreas != null and largeAreas != ''"> and large_areas=#{largeAreas} </if>
 			<if test="orientation != null and orientation != ''"> and orientation=#{orientation} </if>
 			<if test="houseType != null and houseType != ''"> and house_type like '${houseType}室%'  </if>
+			<if test="status != null and status != ''"> and status=#{status} </if>
 			<if test="priceStart != null and priceStart != '' and priceEnd != null and priceEnd != ''"> and price between #{priceStart} and #{priceEnd} </if>
 
 		</where>
@@ -71,7 +72,8 @@
         select `id`,`title`,`large_areas`,`small_areas`,`square_meter`,`orientation`,`house_type`,`pubdate`,`price`,`description`,`address`,`add_time`,`landlord_id`,`tenant_id`,`elevator`,`tv`,`fridge`,`air_conditioner`,`broad_band`,`wardrobe`,`createtime`,`updatetime`,`status` from house
         <where>
             <if test="title != null and title != ''"> or title like '%${title}%' </if>
-            <if test="largeAreas != null and largeAreas != ''"> or large_areas like '%${largeAreas}%' </if>
+			<if test="status != null and status != ''"> and status=#{status} </if>
+			<if test="largeAreas != null and largeAreas != ''"> or large_areas like '%${largeAreas}%' </if>
        </where>
 
     </select>
@@ -79,6 +81,7 @@
 		select count(*) from house
 		<where>
 			<if test="title != null and title != ''"> or title like '%${title}%'</if>
+			<if test="status != null and status != ''"> and status=#{status} </if>
 			<if test="largeAreas != null and largeAreas != ''"> or large_areas like '%${largeAreas}%'  </if>
 		</where>
 
