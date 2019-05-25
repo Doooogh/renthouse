@@ -162,7 +162,6 @@
 			`tenant_id`,
 			`elevator`, 
 			`tv`,
-
 			`fridge`, 
 			`air_conditioner`, 
 			`broad_band`, 
@@ -215,7 +214,6 @@
 			<if test="addTime != null">`add_time` = #{addTime}, </if>
 			<if test="landlordId != null">`landlord_id` = #{landlordId}, </if>
 			<if test="tenantId != null ">`tenant_id` = #{tenantId}, </if>
-			<if test="uId != null and uId != ''"> and `u_id` = #{uId} </if>
 			<if test="elevator != null">`elevator` = #{elevator}, </if>
 			<if test="tv != null">`tv` = #{tv}, </if>
 			<if test="fridge != null">`fridge` = #{fridge}, </if>
