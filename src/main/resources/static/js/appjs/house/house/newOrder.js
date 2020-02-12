@@ -240,8 +240,6 @@ function to_order() {
                 }
             });
         })
-    }else{
-        alert("错误");
     }
 
 }

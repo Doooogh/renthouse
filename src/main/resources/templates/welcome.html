@@ -130,6 +130,7 @@
                     rangeDate:$("#date").val()
                 },
                 success:function (data) {
+                    console.log(data);
                     chart(data,"main");
                 },
                 error:function () {
@@ -165,7 +166,7 @@
                     borderWidth:1
                 },
                 legend: {
-                    data: ['订单', '房东', '添加房子', ]
+                    data: []
                 },
                 toolbox: {
                     show: true,
@@ -182,7 +183,7 @@
                     {
                         type: 'category',
                         boundaryGap: false,
-                        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                        data: []
                     }
                 ],
                 yAxis: [
@@ -191,24 +192,6 @@
                     }
                 ],
                 series: [
-                    {
-                        name: '订单',
-                        type: 'line',
-                        stack: '总量',
-                        data: [1, 1, 0]
-                    },
-                    {
-                        name: '房东',
-                        type: 'line',
-                        stack: '总量',
-                        data: [0, 1, 0]
-                    },
-                    {
-                        name: '添加房子',
-                        type: 'line',
-                        stack: '总量',
-                        data: [0, 0, 1]
-                    },
 
                 ]
             };
@@ -229,6 +212,13 @@
                 }
                 myChart = echarts.init(document.getElementById(id));
                 myChart.setOption(option);
+                // myChart.setOption(option);
+                window.onresize = myChart.resize;
+            }else{
+                myChart = echarts.init(document.getElementById(id));
+                myChart.clear();
+                myChart.setOption(option);
+                // myChart.setOption(option);
                 window.onresize = myChart.resize;
             }
 
